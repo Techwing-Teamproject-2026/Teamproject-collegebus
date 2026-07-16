@@ -1,5 +1,5 @@
 package com.example.demo.models;
 
-public class Admin {
+public class Complaint {
 
 }
