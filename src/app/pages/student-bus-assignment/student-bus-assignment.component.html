@@ -1,0 +1,96 @@
+<div class="container mt-4">
+
+    <h2 class="mb-4">Student Bus Assignment List</h2>
+
+    <div class="mb-3">
+
+        <button class="btn btn-success" routerLink="/add-student-bus-assignment">
+
+            Add Assignment
+
+        </button>
+
+    </div>
+
+    <table class="table table-bordered table-striped table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Student ID</th>
+
+                <th>Bus ID</th>
+
+                <th>Route ID</th>
+
+                <th>Assigned Date</th>
+
+                <th>Status</th>
+
+                <th>Created At</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let assignment of assignments">
+
+                <td>{{assignment.assignmentId}}</td>
+
+                <td>{{ getStudentName(assignment.studentId) }}</td>
+
+                <td>{{ getBusNo(assignment.busId) }}</td>
+
+                <td>{{ getRouteName(assignment.routeId) }}</td>
+
+                <td>{{assignment.assignedDate}}</td>
+
+                <td>
+
+                    <span class="badge bg-success" *ngIf="assignment.isActive">
+
+                        Active
+
+                    </span>
+
+                    <span class="badge bg-danger" *ngIf="!assignment.isActive">
+
+                        Inactive
+
+                    </span>
+
+                </td>
+
+                <td>{{assignment.createdAt}}</td>
+
+                <td>
+
+                    <button class="btn btn-primary btn-sm"
+                        [routerLink]="['/edit-student-bus-assignment', assignment.assignmentId]">
+
+                        Edit
+
+                    </button>
+
+                    <button class="btn btn-danger btn-sm" (click)="deleteAssignment(assignment.assignmentId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

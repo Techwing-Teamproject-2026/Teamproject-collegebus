@@ -1,0 +1,105 @@
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>🎓 Student Management</h2>
+
+        <button class="btn btn-success" routerLink="/add-student">
+            <i class="bi bi-plus-circle"></i> Add Student
+        </button>
+
+    </div>
+
+    <div class="row mb-3">
+
+        <div class="col-md-5">
+
+            <input
+                type="text"
+                class="form-control"
+                placeholder="🔍 Search by Name, Roll No or Department"
+                [(ngModel)]="searchText"
+                (keyup)="searchStudents()">
+
+        </div>
+
+        <div class="col-md-7 text-end">
+
+            <span class="badge bg-primary fs-6">
+                Total Students : {{students.length}}
+            </span>
+
+        </div>
+
+    </div>
+
+    <table class="table table-bordered table-hover table-striped shadow-sm">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+                <th>Name</th>
+                <th>Roll No</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Year</th>
+                <th>Bus Pass</th>
+                <th width="220">Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let student of students | paginate: { itemsPerPage: 10, currentPage: p }">
+
+                <td>{{student.studentId}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.rollNo}}</td>
+                <td>{{student.email}}</td>
+                <td>{{student.department}}</td>
+                <td>{{student.year}}</td>
+                <td>{{student.busPassNumber}}</td>
+
+                <td>
+
+                    <button
+                        class="btn btn-primary btn-sm me-2"
+                        [routerLink]="['/edit-student', student.studentId]">
+                        Edit
+                    </button>
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        (click)="deleteStudent(student.studentId!)">
+                        Delete
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr *ngIf="students.length == 0">
+
+                <td colspan="8" class="text-center text-danger fw-bold">
+                    No Students Found
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <div class="d-flex justify-content-center mt-3">
+
+        <pagination-controls
+            (pageChange)="p = $event">
+        </pagination-controls>
+
+    </div>
+
+</div>

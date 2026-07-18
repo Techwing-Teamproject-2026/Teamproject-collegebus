@@ -1,0 +1,99 @@
+<div class="container mt-4">
+
+    <h2 class="mb-4">Route List</h2>
+
+    <div class="mb-3">
+
+        <button class="btn btn-success" routerLink="/add-route">
+
+            Add Route
+
+        </button>
+
+    </div>
+
+    <table class="table table-bordered table-striped table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Route Name</th>
+
+                <th>Route Code</th>
+
+                <th>Start Point</th>
+
+                <th>End Point</th>
+
+                <th>Distance (KM)</th>
+
+                <th>Expected Time (Min)</th>
+
+                <th>Status</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let route of routes">
+
+                <td>{{route.routeId}}</td>
+
+                <td>{{route.routeName}}</td>
+
+                <td>{{route.routeCode}}</td>
+
+                <td>{{route.startPoint}}</td>
+
+                <td>{{route.endPoint}}</td>
+
+                <td>{{route.distance}}</td>
+
+                <td>{{route.expectedTime}}</td>
+
+                <td>
+
+                    <span class="badge bg-success" *ngIf="route.isActive">
+
+                        Active
+
+                    </span>
+
+                    <span class="badge bg-danger" *ngIf="!route.isActive">
+
+                        Inactive
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button class="btn btn-primary btn-sm me-2" (click)="editRoute(route.routeId!)">
+
+                        Edit
+
+                    </button>
+
+                    <button class="btn btn-danger btn-sm" (click)="deleteRoute(route.routeId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

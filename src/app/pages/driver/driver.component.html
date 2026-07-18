@@ -1,0 +1,72 @@
+<div class="container mt-4">
+
+    <h2 class="mb-4">Driver List</h2>
+
+    <div class="mb-3">
+
+        <button class="btn btn-success" routerLink="/add-driver">
+
+            Add Driver
+
+        </button>
+
+    </div>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>License</th>
+                <th>Status</th>
+                <th width="180">Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let driver of drivers">
+
+                <td>{{driver.driverId}}</td>
+
+                <td>{{driver.name}}</td>
+
+                <td>{{driver.phone}}</td>
+
+                <td>{{driver.license}}</td>
+
+                <td>{{driver.status}}</td>
+
+                <td>
+
+                    <button
+                        class="btn btn-primary btn-sm me-2"
+                        [routerLink]="['/edit-driver', driver.driverId]">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        (click)="deleteDriver(driver.driverId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

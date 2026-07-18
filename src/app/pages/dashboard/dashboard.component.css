@@ -1,0 +1,42 @@
+.dashboard-card{
+
+    cursor:pointer;
+    border:none;
+    border-radius:12px;
+    transition:0.3s;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-8px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+
+}
+
+.card{
+
+    border:none;
+    border-radius:12px;
+
+}
+
+.card h2{
+
+    font-size:36px;
+    font-weight:bold;
+
+}
+
+.card h5{
+
+    font-weight:600;
+
+}
+
+.card-header{
+
+    font-size:18px;
+    font-weight:bold;
+
+}

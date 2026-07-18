@@ -1,0 +1,208 @@
+<div class="container-fluid mt-4">
+
+    <h2 class="mb-4 fw-bold">
+        📊 Dashboard
+    </h2>
+
+    <!-- Dashboard Cards -->
+    <div class="row">
+
+        <!-- Students -->
+        <div class="col-md-4 mb-4">
+
+            <div class="card text-white bg-primary shadow dashboard-card" routerLink="/students">
+
+                <div class="card-body text-center">
+
+                    <h5>Total Students</h5>
+
+                    <h2>{{studentCount}}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Drivers -->
+        <div class="col-md-4 mb-4">
+
+            <div class="card text-white bg-success shadow dashboard-card" routerLink="/drivers">
+
+                <div class="card-body text-center">
+
+                    <h5>Total Drivers</h5>
+
+                    <h2>{{driverCount}}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Buses -->
+        <div class="col-md-4 mb-4">
+
+            <div class="card text-white bg-warning shadow dashboard-card" routerLink="/buses">
+
+                <div class="card-body text-center">
+
+                    <h5>Total Buses</h5>
+
+                    <h2>{{busCount}}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Routes -->
+        <div class="col-md-4 mb-4">
+
+            <div class="card text-white bg-info shadow dashboard-card" routerLink="/routes">
+
+                <div class="card-body text-center">
+
+                    <h5>Total Routes</h5>
+
+                    <h2>{{routeCount}}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Attendance -->
+        <div class="col-md-4 mb-4">
+
+            <div class="card text-white bg-danger shadow dashboard-card" routerLink="/attendance">
+
+                <div class="card-body text-center">
+
+                    <h5>Attendance Records</h5>
+
+                    <h2>{{attendanceCount}}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Assignment -->
+        <div class="col-md-4 mb-4">
+
+            <div class="card text-white bg-secondary shadow dashboard-card" routerLink="/student-bus-assignment">
+
+                <div class="card-body text-center">
+
+                    <h5>Bus Assignments</h5>
+
+                    <h2>{{assignmentCount}}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Quick Actions -->
+
+    <h3 class="mb-4">
+        🚀 Quick Actions
+    </h3>
+
+    <div class="row">
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow text-center">
+
+                <div class="card-body">
+
+                    <h5>Add Student</h5>
+
+                    <button class="btn btn-primary mt-2" routerLink="/add-student">
+
+                        Go
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow text-center">
+
+                <div class="card-body">
+
+                    <h5>Add Driver</h5>
+
+                    <button class="btn btn-success mt-2" routerLink="/add-driver">
+
+                        Go
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow text-center">
+
+                <div class="card-body">
+
+                    <h5>Add Bus</h5>
+
+                    <button class="btn btn-warning mt-2" routerLink="/add-bus">
+
+                        Go
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow text-center">
+
+                <div class="card-body">
+
+                    <h5>Add Route</h5>
+
+                    <button class="btn btn-info mt-2" routerLink="/add-route">
+
+                        Go
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr class="my-4">
+
+    

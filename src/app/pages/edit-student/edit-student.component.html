@@ -1,0 +1,97 @@
+<div class="container mt-4">
+
+    <h2>Edit Student</h2>
+
+    <div class="card p-4">
+
+        <div class="mb-3">
+            <label>Name</label>
+            <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="student.name">
+        </div>
+
+        <div class="mb-3">
+            <label>Roll No</label>
+            <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="student.rollNo">
+        </div>
+
+        <div class="mb-3">
+            <label>Email</label>
+            <input
+                type="email"
+                class="form-control"
+                [(ngModel)]="student.email">
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="student.password">
+        </div>
+
+        <div class="mb-3">
+            <label>Department</label>
+            <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="student.department">
+        </div>
+
+        <div class="mb-3">
+            <label>Year</label>
+            <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="student.year">
+        </div>
+
+        <div class="mb-3">
+            <label>Bus Pass Number</label>
+            <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="student.busPassNumber">
+        </div>
+
+        <div class="mb-3">
+            <label>Route ID</label>
+            <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="student.routeId">
+        </div>
+
+        <div class="mb-3">
+            <label>Bus ID</label>
+            <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="student.busId">
+        </div>
+
+        <div class="mb-3">
+            <label>Photo URL</label>
+            <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="student.photoUrl">
+        </div>
+
+        <button
+            class="btn btn-primary"
+            (click)="updateStudent()">
+
+            Update Student
+
+        </button>
+
+    </div>
+
+</div>

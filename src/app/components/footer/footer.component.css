@@ -1,0 +1,31 @@
+.footer{
+
+    background:#2c3e50;
+    color:white;
+    height:60px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-top:auto;
+
+}
+
+.container-fluid{
+
+    width:100%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 25px;
+
+}
+
+.developer{
+
+    font-weight:bold;
+
+}

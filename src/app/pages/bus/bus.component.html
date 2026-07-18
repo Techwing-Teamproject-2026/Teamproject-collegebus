@@ -1,0 +1,83 @@
+<div class="container mt-4">
+
+    <h2 class="mb-4">Bus List</h2>
+
+    <div class="mb-3">
+
+        <button class="btn btn-success" routerLink="/add-bus">
+
+            Add Bus
+
+        </button>
+
+    </div>
+
+    <table class="table table-bordered table-striped table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+                <th>Bus No</th>
+                <th>Registration No</th>
+                <th>Capacity</th>
+                <th>Status</th>
+                <th>Driver ID</th>
+                <th>Route ID</th>
+                <th>Current Stop</th>
+                <th>Next Stop</th>
+                <th>Speed</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let bus of buses">
+
+                <td>{{bus.busId}}</td>
+
+                <td>{{bus.busNo}}</td>
+
+                <td>{{bus.registrationNumber}}</td>
+
+                <td>{{bus.capacity}}</td>
+
+                <td>{{bus.status}}</td>
+
+                <td>{{bus.driverId}}</td>
+
+                <td>{{bus.routeId}}</td>
+
+                <td>{{bus.currentStop}}</td>
+
+                <td>{{bus.nextStop}}</td>
+
+                <td>{{bus.speed}}</td>
+
+                <td>
+
+                    <button class="btn btn-primary btn-sm me-2" (click)="editBus(bus.busId!)">
+
+                        Edit
+
+                    </button>
+
+                    <button class="btn btn-danger btn-sm" (click)="deleteBus(bus.busId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>

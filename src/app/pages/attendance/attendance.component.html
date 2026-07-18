@@ -1,0 +1,101 @@
+<div class="container mt-4">
+
+    <h2 class="mb-4">Attendance List</h2>
+
+    <div class="mb-3">
+
+        <button
+            class="btn btn-success"
+            routerLink="/add-attendance">
+
+            Add Attendance
+
+        </button>
+
+    </div>
+
+    <table class="table table-bordered table-striped table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Student ID</th>
+
+                <th>Bus ID</th>
+
+                <th>Scan Time</th>
+
+                <th>Scan Type</th>
+
+                <th>Created At</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr *ngFor="let attendance of attendances">
+
+                <td>{{attendance.attendanceId}}</td>
+
+                <td>{{attendance.studentId}}</td>
+
+                <td>{{attendance.busId}}</td>
+
+                <td>{{attendance.scanTime}}</td>
+
+                <td>
+
+                    <span
+                        class="badge bg-success"
+                        *ngIf="attendance.scanType == 'BOARDING'">
+
+                        BOARDING
+
+                    </span>
+
+                    <span
+                        class="badge bg-warning text-dark"
+                        *ngIf="attendance.scanType == 'ALIGHTING'">
+
+                        ALIGHTING
+
+                    </span>
+
+                </td>
+
+                <td>{{attendance.createdAt}}</td>
+
+                <td>
+
+                    <button
+                        class="btn btn-primary btn-sm me-2"
+                        (click)="editAttendance(attendance.attendanceId!)">
+
+                        Edit
+
+                    </button>
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        (click)="deleteAttendance(attendance.attendanceId!)">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
