@@ -17,4 +17,5 @@ public interface AdminService {
 
     void deleteAdmin(Long id);
 
+    Admin login(String username, String password);
 }

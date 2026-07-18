@@ -11,7 +11,7 @@ import com.example.demo.service.DriverService;
 
 @RestController
 @RequestMapping("/driver")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DriverController {
 
     @Autowired

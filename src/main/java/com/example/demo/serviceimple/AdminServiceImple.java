@@ -13,47 +13,68 @@ import com.example.demo.service.AdminService;
 @Service
 public class AdminServiceImple implements AdminService {
 
-    @Autowired
-    private AdminRepository adminRepository;
+	@Autowired
+	private AdminRepository adminRepository;
 
-    @Override
-    public Admin saveAdmin(Admin admin) {
-        return adminRepository.save(admin);
-    }
+	@Override
+	public Admin saveAdmin(Admin admin) {
+		return adminRepository.save(admin);
+	}
 
-    @Override
-    public List<Admin> getAllAdmins() {
-        return adminRepository.findAll();
-    }
+	@Override
+	public List<Admin> getAllAdmins() {
+		return adminRepository.findAll();
+	}
 
-    @Override
-    public Optional<Admin> getAdminById(Long id) {
-        return adminRepository.findById(id);
-    }
+	@Override
+	public Optional<Admin> getAdminById(Long id) {
+		return adminRepository.findById(id);
+	}
 
-    @Override
-    public Admin updateAdmin(Long id, Admin admin) {
+	@Override
+	public Admin updateAdmin(Long id, Admin admin) {
 
-        Admin existingAdmin = adminRepository.findById(id).orElse(null);
+		Admin existingAdmin = adminRepository.findById(id).orElse(null);
 
-        if (existingAdmin != null) {
+		if (existingAdmin != null) {
 
-            existingAdmin.setUsername(admin.getUsername());
-            existingAdmin.setPassword(admin.getPassword());
-            existingAdmin.setEmail(admin.getEmail());
-            existingAdmin.setRole(admin.getRole());
-            existingAdmin.setFullName(admin.getFullName());
-            existingAdmin.setCreatedAt(admin.getCreatedAt());
+			existingAdmin.setUsername(admin.getUsername());
+			existingAdmin.setPassword(admin.getPassword());
+			existingAdmin.setEmail(admin.getEmail());
+			existingAdmin.setRole(admin.getRole());
+			existingAdmin.setFullName(admin.getFullName());
+			existingAdmin.setCreatedAt(admin.getCreatedAt());
 
-            return adminRepository.save(existingAdmin);
-        }
+			return adminRepository.save(existingAdmin);
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    @Override
-    public void deleteAdmin(Long id) {
-        adminRepository.deleteById(id);
-    }
+	@Override
+	public void deleteAdmin(Long id) {
+		adminRepository.deleteById(id);
+	}
+
+	@Override
+	public Admin login(String username, String password) {
+
+		Optional<Admin> admin = adminRepository.findByUsername(username);
+
+		if (admin.isPresent()) {
+
+			Admin dbAdmin = admin.get();
+
+			if (dbAdmin.getPassword().equals(password)) {
+
+				return dbAdmin;
+
+			}
+
+		}
+
+		return null;
+
+	}
 
 }

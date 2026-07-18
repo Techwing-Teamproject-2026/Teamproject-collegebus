@@ -11,7 +11,7 @@ import com.example.demo.service.StudentBusAssignmentService;
 
 @RestController
 @RequestMapping("/studentbusassignment")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class StudentBusAssignmentController {
 
     @Autowired
