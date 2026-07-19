@@ -37,6 +37,23 @@ import { AddStudentBusAssignmentComponent } from './pages/add-student-bus-assign
 import { EditStudentBusAssignmentComponent } from './pages/edit-student-bus-assignment/edit-student-bus-assignment.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
+import { AddStopComponent } from './pages/add-stop/add-stop.component';
+import { EditStopComponent } from './pages/edit-stop/edit-stop.component';
+import { AddComplaintComponent } from './pages/add-complaint/add-complaint.component';
+import { EditComplaintComponent } from './pages/edit-complaint/edit-complaint.component';
+import { AddNotificationComponent } from './pages/add-notification/add-notification.component';
+import { StudentLoginComponent } from './pages/student-login/student-login.component';
+import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
+import { StudentLayoutComponent } from './student/student-layout/student-layout.component';
+import { StudentNavbarComponent } from './student/student-navbar/student-navbar.component';
+import { StudentSidebarComponent } from './student/student-sidebar/student-sidebar.component';
+import { StudentProfileComponent } from './pages/student-profile/student-profile.component';
+import { StudentBusComponent } from './pages/student-bus/student-bus.component';
+import { StudentRouteComponent } from './pages/student-route/student-route.component';
+import { StudentAttendanceComponent } from './pages/student-attendance/student-attendance.component';
+import { StudentNotificationComponent } from './pages/student-notification/student-notification.component';
+import { StudentComplaintComponent } from './pages/student-complaint/student-complaint.component';
+import { StudentChangePasswordComponent } from './pages/student-change-password/student-change-password.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +86,24 @@ import { ToastrModule } from 'ngx-toastr';
     EditAttendanceComponent,
     StudentBusAssignmentComponent,
     AddStudentBusAssignmentComponent,
-    EditStudentBusAssignmentComponent
+    EditStudentBusAssignmentComponent,
+    AddStopComponent,
+    EditStopComponent,
+    AddComplaintComponent,
+    EditComplaintComponent,
+    AddNotificationComponent,
+    StudentLoginComponent,
+    StudentDashboardComponent,
+    StudentLayoutComponent,
+    StudentNavbarComponent,
+    StudentSidebarComponent,
+    StudentProfileComponent,
+    StudentBusComponent,
+    StudentRouteComponent,
+    StudentAttendanceComponent,
+    StudentNotificationComponent,
+    StudentComplaintComponent,
+    StudentChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

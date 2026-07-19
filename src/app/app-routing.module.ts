@@ -23,13 +23,80 @@ import { AddStudentBusAssignmentComponent } from './pages/add-student-bus-assign
 import { EditStudentBusAssignmentComponent } from './pages/edit-student-bus-assignment/edit-student-bus-assignment.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { StopsComponent } from './pages/stops/stops.component';
+import { AddStopComponent } from './pages/add-stop/add-stop.component';
+import { EditStopComponent } from './pages/edit-stop/edit-stop.component';
+import { AddComplaintComponent } from './pages/add-complaint/add-complaint.component';
+import { EditComplaintComponent } from './pages/edit-complaint/edit-complaint.component';
+import { ComplaintComponent } from './pages/complaint/complaint.component';
+import { NotificationComponent } from './pages/notification/notification.component';
+import { AddNotificationComponent } from './pages/add-notification/add-notification.component';
+import { StudentLoginComponent } from './pages/student-login/student-login.component';
+import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
+import { StudentLayoutComponent } from './student/student-layout/student-layout.component';
+import { StudentProfileComponent } from './pages/student-profile/student-profile.component';
+import { StudentBusComponent } from './pages/student-bus/student-bus.component';
+import { StudentRouteComponent } from './pages/student-route/student-route.component';
+import { StudentAttendanceComponent } from './pages/student-attendance/student-attendance.component';
+import { StudentNotificationComponent } from './pages/student-notification/student-notification.component';
+import { StudentComplaintComponent } from './pages/student-complaint/student-complaint.component';
+import { StudentChangePasswordComponent } from './pages/student-change-password/student-change-password.component';
+import { StudentAuthGuard } from './guards/student-auth.guard';
 
 const routes: Routes = [
 
-  // Login Page
+  //  Admin Login
   {
     path: '',
     component: LoginComponent
+  },
+  // Student Routes
+  {
+    path: 'student-login',
+    component: StudentLoginComponent
+  },
+  // Student Layout
+  {
+    path: '',
+    component: StudentLayoutComponent,
+    canActivate: [StudentAuthGuard],
+    children: [
+
+      {
+        path: 'student-dashboard',
+        component: StudentDashboardComponent
+      },
+      {
+        path: 'student-profile',
+        component: StudentProfileComponent
+      },
+      {
+        path: 'student-bus',
+        component: StudentBusComponent
+      },
+      {
+        path: 'student-route',
+        component: StudentRouteComponent
+      },
+      {
+        path: 'student-attendance',
+        component: StudentAttendanceComponent
+      },
+      {
+        path: 'student-notifications',
+        component: StudentNotificationComponent
+      },
+      {
+        path: 'student-complaint',
+        component: StudentComplaintComponent
+      },
+      {
+        path: 'student-change-password',
+        component: StudentChangePasswordComponent
+      }
+
+
+    ]
   },
 
   // Admin Layout
@@ -139,6 +206,46 @@ const routes: Routes = [
       {
         path: 'edit-student-bus-assignment/:id',
         component: EditStudentBusAssignmentComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'stops',
+        component: StopsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'add-stop',
+        component: AddStopComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'edit-stop/:id',
+        component: EditStopComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'complaints',
+        component: ComplaintComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'add-complaint',
+        component: AddComplaintComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'edit-complaint/:id',
+        component: EditComplaintComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'notifications',
+        component: NotificationComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'add-notification',
+        component: AddNotificationComponent,
         canActivate: [AuthGuard]
       }
 

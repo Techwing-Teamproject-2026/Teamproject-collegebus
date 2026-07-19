@@ -16,7 +16,7 @@
 
                     <h5>Total Students</h5>
 
-                    <h2>{{studentCount}}</h2>
+                    <h2>{{ dashboard.totalStudents }}</h2>
 
                 </div>
 
@@ -33,7 +33,7 @@
 
                     <h5>Total Drivers</h5>
 
-                    <h2>{{driverCount}}</h2>
+                    <h2>{{ dashboard.totalDrivers }}</h2>
 
                 </div>
 
@@ -50,7 +50,7 @@
 
                     <h5>Total Buses</h5>
 
-                    <h2>{{busCount}}</h2>
+                    <h2>{{ dashboard.totalBuses }}</h2>
 
                 </div>
 
@@ -67,7 +67,7 @@
 
                     <h5>Total Routes</h5>
 
-                    <h2>{{routeCount}}</h2>
+                    <h2>{{ dashboard.totalRoutes }}</h2>
 
                 </div>
 
@@ -84,7 +84,7 @@
 
                     <h5>Attendance Records</h5>
 
-                    <h2>{{attendanceCount}}</h2>
+                    <h2>{{ dashboard.totalAttendance }}</h2>
 
                 </div>
 
@@ -92,16 +92,16 @@
 
         </div>
 
-        <!-- Assignment -->
+        <!-- Complaints -->
         <div class="col-md-4 mb-4">
 
-            <div class="card text-white bg-secondary shadow dashboard-card" routerLink="/student-bus-assignment">
+            <div class="card text-white bg-secondary shadow dashboard-card" routerLink="/complaints">
 
                 <div class="card-body text-center">
 
-                    <h5>Bus Assignments</h5>
+                    <h5>Total Complaints</h5>
 
-                    <h2>{{assignmentCount}}</h2>
+                    <h2>{{ dashboard.totalComplaints }}</h2>
 
                 </div>
 
@@ -205,4 +205,4 @@
 
     <hr class="my-4">
 
-    
+</div>

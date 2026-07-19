@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Student } from '../models/student';
+import { BusDetails } from '../models/bus-details';
+import { RouteDetails } from '../models/route-details';
+import { Attendance } from '../models/attendance';
+import { Notification } from '../models/notification';
+import { Complaint } from '../models/complaint';
+import { ChangePassword } from '../models/change-password';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +37,68 @@ export class StudentService {
     return this.http.delete(`${this.baseUrl}/delete/${id}`, {
       responseType: 'text'
     });
+  }
+  login(email: string, password: string): Observable<Student> {
+    return this.http.post<Student>(`${this.baseUrl}/login`, {
+      email,
+      password
+    });
+  }
+  getProfile(id: number): Observable<Student> {
+
+    return this.http.get<Student>(`${this.baseUrl}/profile/${id}`);
+
+  }
+  getBusDetails(id: number): Observable<BusDetails> {
+
+    return this.http.get<BusDetails>(`${this.baseUrl}/bus/${id}`);
+
+  }
+  getRouteDetails(studentId: number) {
+
+    return this.http.get<RouteDetails>(
+      `${this.baseUrl}/route/${studentId}`
+    );
+
+  }
+  getAttendance(studentId: number) {
+
+    return this.http.get<Attendance[]>(
+      `${this.baseUrl}/attendance/${studentId}`
+    );
+
+  }
+  getNotifications(studentId: number) {
+
+    return this.http.get<Notification[]>(
+      `${this.baseUrl}/notifications/${studentId}`
+    );
+
+  }
+  getComplaints(studentId: number) {
+
+    return this.http.get<Complaint[]>(
+      `${this.baseUrl}/complaints/${studentId}`
+    );
+
+  }
+
+  saveComplaint(complaint: Complaint) {
+
+    return this.http.post(
+      `${this.baseUrl}/complaints`,
+      complaint
+    );
+
+  }
+  changePassword(data: ChangePassword) {
+
+    return this.http.post(
+      this.baseUrl + "/change-password",
+      data,
+      { responseType: 'text' }
+    );
+
   }
 
 }
