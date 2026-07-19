@@ -3,18 +3,29 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.models.Bus_Occupancy;
+import com.example.demo.models.BusOccupancy;
 
 public interface BusOccupancyService {
 
-    Bus_Occupancy saveBusOccupancy(Bus_Occupancy busOccupancy);
+	// Save Bus Occupancy
+	BusOccupancy saveBusOccupancy(BusOccupancy busOccupancy);
 
-    List<Bus_Occupancy> getAllBusOccupancies();
+	// Get All Bus Occupancies
+	List<BusOccupancy> getAllBusOccupancies();
 
-    Optional<Bus_Occupancy> getBusOccupancyById(Long id);
+	// Get Bus Occupancy By Database Id
+	Optional<BusOccupancy> getBusOccupancyById(Long id);
 
-    Bus_Occupancy updateBusOccupancy(Long id, Bus_Occupancy busOccupancy);
+	// Get Bus Occupancy By Bus Id
+	Optional<BusOccupancy> getBusOccupancyByBusId(Long busId);
 
-    void deleteBusOccupancy(Long id);
+	// Update Bus Occupancy
+	BusOccupancy updateBusOccupancy(Long id, BusOccupancy busOccupancy);
+
+	// Delete Bus Occupancy
+	void deleteBusOccupancy(Long id);
+
+	// Calculate Occupancy Automatically
+	void calculateBusOccupancy(Long busId);
 
 }

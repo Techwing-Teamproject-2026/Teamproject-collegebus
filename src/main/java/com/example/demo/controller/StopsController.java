@@ -11,7 +11,7 @@ import com.example.demo.service.StopsService;
 
 @RestController
 @RequestMapping("/stops")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class StopsController {
 
     @Autowired

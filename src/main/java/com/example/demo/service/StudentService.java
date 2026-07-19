@@ -4,17 +4,41 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.models.student;
+import com.example.demo.dto.BusDetailsDTO;
+import com.example.demo.dto.ChangePasswordDTO;
+import com.example.demo.dto.RouteDetailsDTO;
+import com.example.demo.dto.AttendanceDTO;
+import com.example.demo.dto.NotificationDTO;
+import com.example.demo.dto.ComplaintDTO;
+import com.example.demo.models.Complaint;
 
 public interface StudentService {
 
-    student saveStudent(student student);
+	student saveStudent(student student);
 
-    List<student> getAllStudents();
+	List<student> getAllStudents();
 
-    Optional<student> getStudentById(Long id);
+	Optional<student> getStudentById(Long id);
 
-    student updateStudent(Long id, student student);
+	student updateStudent(Long id, student student);
 
-    void deleteStudent(Long id);
+	void deleteStudent(Long id);
+
+	// Login
+	student login(String email, String password);
+
+	BusDetailsDTO getBusDetails(Long studentId);
+
+	RouteDetailsDTO getRouteDetails(Long studentId);
+
+	List<AttendanceDTO> getAttendance(Long studentId);
+
+	List<NotificationDTO> getNotifications(Long studentId);
+
+	List<ComplaintDTO> getStudentComplaints(Long studentId);
+
+	Complaint saveComplaint(Complaint complaint);
+
+	boolean changePassword(ChangePasswordDTO dto);
 
 }

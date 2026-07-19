@@ -6,58 +6,207 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.BusDetailsDTO;
+import com.example.demo.dto.ChangePasswordDTO;
+import com.example.demo.models.Bus;
 import com.example.demo.models.student;
+import com.example.demo.repository.AttendanceRepository;
+import com.example.demo.repository.BusRepository;
+import com.example.demo.repository.ComplaintRepository;
+import com.example.demo.repository.NotificationRepository;
+import com.example.demo.repository.RouteRepository;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
+import com.example.demo.dto.RouteDetailsDTO;
+import com.example.demo.models.Route;
+import java.util.stream.Collectors;
+import com.example.demo.dto.AttendanceDTO;
+import com.example.demo.models.Attendance;
+import com.example.demo.dto.NotificationDTO;
+import com.example.demo.models.Notification;
+import com.example.demo.dto.ComplaintDTO;
+import com.example.demo.models.Complaint;
 
 @Service
 public class StudentServiceImple implements StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
+	@Autowired
+	private StudentRepository studentRepository;
 
-    @Override
-    public student saveStudent(student student) {
-        return studentRepository.save(student);
-    }
+	@Autowired
+	private BusRepository busRepository;
 
-    @Override
-    public List<student> getAllStudents() {
-        return studentRepository.findAll();
-    }
+	@Autowired
+	private RouteRepository routeRepository;
 
-    @Override
-    public Optional<student> getStudentById(Long id) {
-        return studentRepository.findById(id);
-    }
+	@Autowired
+	private AttendanceRepository attendanceRepository;
 
-    @Override
-    public student updateStudent(Long id, student student) {
+	@Autowired
+	private NotificationRepository notificationRepository;
 
-        student existingStudent = studentRepository.findById(id).orElse(null);
+	@Autowired
+	private ComplaintRepository complaintRepository;
 
-        if (existingStudent != null) {
+	@Override
+	public student saveStudent(student student) {
+		return studentRepository.save(student);
+	}
 
-            existingStudent.setName(student.getName());
-            existingStudent.setRollNo(student.getRollNo());
-            existingStudent.setEmail(student.getEmail());
-            existingStudent.setPassword(student.getPassword());
-            existingStudent.setDepartment(student.getDepartment());
-            existingStudent.setYear(student.getYear());
-            existingStudent.setBusPassNumber(student.getBusPassNumber());
-            existingStudent.setRouteId(student.getRouteId());
-            existingStudent.setBusId(student.getBusId());
-            existingStudent.setPhotoUrl(student.getPhotoUrl());
+	@Override
+	public List<student> getAllStudents() {
+		return studentRepository.findAll();
+	}
 
-            return studentRepository.save(existingStudent);
-        }
+	@Override
+	public Optional<student> getStudentById(Long id) {
+		return studentRepository.findById(id);
+	}
 
-        return null;
-    }
+	@Override
+	public student updateStudent(Long id, student student) {
 
-    @Override
-    public void deleteStudent(Long id) {
-        studentRepository.deleteById(id);
-    }
+		student existingStudent = studentRepository.findById(id).orElse(null);
+
+		if (existingStudent != null) {
+
+			existingStudent.setName(student.getName());
+			existingStudent.setRollNo(student.getRollNo());
+			existingStudent.setEmail(student.getEmail());
+			existingStudent.setPassword(student.getPassword());
+			existingStudent.setDepartment(student.getDepartment());
+			existingStudent.setYear(student.getYear());
+			existingStudent.setBusPassNumber(student.getBusPassNumber());
+			existingStudent.setRouteId(student.getRouteId());
+			existingStudent.setBusId(student.getBusId());
+			existingStudent.setPhotoUrl(student.getPhotoUrl());
+
+			return studentRepository.save(existingStudent);
+		}
+
+		return null;
+	}
+
+	@Override
+	public void deleteStudent(Long id) {
+		studentRepository.deleteById(id);
+	}
+
+	// Student Login
+	@Override
+	public student login(String email, String password) {
+
+		Optional<student> optionalStudent = studentRepository.findByEmail(email);
+
+		if (optionalStudent.isPresent()) {
+
+			student student = optionalStudent.get();
+
+			if (student.getPassword().equals(password)) {
+				return student;
+			}
+		}
+
+		return null;
+	}
+
+	// My Bus Details
+	@Override
+	public BusDetailsDTO getBusDetails(Long studentId) {
+
+		student s = studentRepository.findById(studentId).orElse(null);
+
+		if (s == null) {
+			return null;
+		}
+
+		Bus bus = busRepository.findById(s.getBusId()).orElse(null);
+
+		if (bus == null) {
+			return null;
+		}
+
+		return new BusDetailsDTO(bus.getBusNo(), bus.getRegistrationNumber(), bus.getCapacity(),
+				bus.getStatus().toString(), bus.getCurrentStop(), bus.getNextStop());
+	}
+
+	@Override
+	public RouteDetailsDTO getRouteDetails(Long studentId) {
+
+		student s = studentRepository.findById(studentId).orElse(null);
+
+		if (s == null) {
+			return null;
+		}
+
+		Route route = routeRepository.findById(s.getRouteId()).orElse(null);
+
+		if (route == null) {
+			return null;
+		}
+
+		return new RouteDetailsDTO(route.getRouteName(), route.getStartPoint(), route.getEndPoint(),
+				route.getDistance().doubleValue());
+
+	}
+
+	@Override
+	public List<AttendanceDTO> getAttendance(Long studentId) {
+
+		List<Attendance> attendanceList = attendanceRepository.findByStudentIdOrderByScanTimeDesc(studentId);
+
+		return attendanceList.stream().map(a -> new AttendanceDTO(a.getScanTime(), a.getScanType().toString()))
+				.collect(Collectors.toList());
+
+	}
+
+	@Override
+	public List<NotificationDTO> getNotifications(Long studentId) {
+
+		List<Notification> notifications = notificationRepository.findByStudentIdOrderByCreatedAtDesc(studentId);
+
+		return notifications.stream().map(n -> new NotificationDTO(n.getTitle(), n.getMessage(), n.getType().toString(),
+				n.getIsRead(), n.getCreatedAt())).collect(Collectors.toList());
+
+	}
+
+	@Override
+	public List<ComplaintDTO> getStudentComplaints(Long studentId) {
+
+		return complaintRepository
+				.findByStudentIdOrderByCreatedAtDesc(studentId).stream().map(c -> new ComplaintDTO(c.getComplaintId(),
+						c.getTitle(), c.getDescription(), c.getStatus().toString(), c.getCreatedAt()))
+				.collect(Collectors.toList());
+
+	}
+
+	@Override
+	public Complaint saveComplaint(Complaint complaint) {
+
+		complaint.setCreatedAt(java.time.LocalDateTime.now());
+
+		return complaintRepository.save(complaint);
+
+	}
+
+	@Override
+	public boolean changePassword(ChangePasswordDTO dto) {
+
+		student s = studentRepository.findById(dto.getStudentId()).orElse(null);
+
+		if (s == null) {
+			return false;
+		}
+
+		if (!s.getPassword().equals(dto.getCurrentPassword())) {
+			return false;
+		}
+
+		s.setPassword(dto.getNewPassword());
+
+		studentRepository.save(s);
+
+		return true;
+	}
 
 }

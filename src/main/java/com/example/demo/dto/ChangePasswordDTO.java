@@ -1,0 +1,35 @@
+package com.example.demo.dto;
+
+public class ChangePasswordDTO {
+
+	private Long studentId;
+	private String currentPassword;
+	private String newPassword;
+
+	public ChangePasswordDTO() {
+	}
+
+	public Long getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
+	}
+
+	public String getCurrentPassword() {
+		return currentPassword;
+	}
+
+	public void setCurrentPassword(String currentPassword) {
+		this.currentPassword = currentPassword;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+}
