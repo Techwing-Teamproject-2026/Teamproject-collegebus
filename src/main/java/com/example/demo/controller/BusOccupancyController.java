@@ -14,49 +14,55 @@ import com.example.demo.service.BusOccupancyService;
 @CrossOrigin(origins = "http://localhost:4200")
 public class BusOccupancyController {
 
-    @Autowired
-    private BusOccupancyService busOccupancyService;
+	@Autowired
+	private BusOccupancyService busOccupancyService;
 
-    // Save Bus Occupancy
-    @PostMapping("/save")
-    public BusOccupancy saveBusOccupancy(@RequestBody BusOccupancy busOccupancy) {
-        return busOccupancyService.saveBusOccupancy(busOccupancy);
-    }
+	// Save Bus Occupancy
+	@PostMapping("/save")
+	public BusOccupancy saveBusOccupancy(@RequestBody BusOccupancy busOccupancy) {
+		return busOccupancyService.saveBusOccupancy(busOccupancy);
+	}
 
-    // Get All Bus Occupancies
-    @GetMapping("/getall")
-    public List<BusOccupancy> getAllBusOccupancies() {
-        return busOccupancyService.getAllBusOccupancies();
-    }
+	// Get All Bus Occupancies
+	@GetMapping("/getall")
+	public List<BusOccupancy> getAllBusOccupancies() {
+		return busOccupancyService.getAllBusOccupancies();
+	}
 
-    // Get Bus Occupancy By Database Id
-    @GetMapping("/get/{id}")
-    public Optional<BusOccupancy> getBusOccupancyById(@PathVariable Long id) {
-        return busOccupancyService.getBusOccupancyById(id);
-    }
+	// Get Bus Occupancy By Database Id
+	@GetMapping("/get/{id}")
+	public Optional<BusOccupancy> getBusOccupancyById(@PathVariable Long id) {
+		return busOccupancyService.getBusOccupancyById(id);
+	}
 
-    // Get Bus Occupancy By Bus Id
-    @GetMapping("/bus/{busId}")
-    public Optional<BusOccupancy> getBusOccupancyByBusId(@PathVariable Long busId) {
-        return busOccupancyService.getBusOccupancyByBusId(busId);
-    }
+	// Get Bus Occupancy By Bus Id
+	@GetMapping("/bus/{busId}")
+	public Optional<BusOccupancy> getBusOccupancyByBusId(@PathVariable Long busId) {
+		return busOccupancyService.getBusOccupancyByBusId(busId);
+	}
 
-    // Update Bus Occupancy
-    @PutMapping("/update/{id}")
-    public BusOccupancy updateBusOccupancy(
-            @PathVariable Long id,
-            @RequestBody BusOccupancy busOccupancy) {
+	// Update Bus Occupancy
+	@PutMapping("/update/{id}")
+	public BusOccupancy updateBusOccupancy(@PathVariable Long id, @RequestBody BusOccupancy busOccupancy) {
 
-        return busOccupancyService.updateBusOccupancy(id, busOccupancy);
-    }
+		return busOccupancyService.updateBusOccupancy(id, busOccupancy);
+	}
 
-    // Delete Bus Occupancy
-    @DeleteMapping("/delete/{id}")
-    public String deleteBusOccupancy(@PathVariable Long id) {
+	// Delete Bus Occupancy
+	@DeleteMapping("/delete/{id}")
+	public String deleteBusOccupancy(@PathVariable Long id) {
 
-        busOccupancyService.deleteBusOccupancy(id);
+		busOccupancyService.deleteBusOccupancy(id);
 
-        return "Bus Occupancy Deleted Successfully";
-    }
+		return "Bus Occupancy Deleted Successfully";
+	}
+
+	@PostMapping("/generate/{busId}")
+	public String generateBusOccupancy(@PathVariable Long busId) {
+
+		busOccupancyService.calculateBusOccupancy(busId);
+
+		return "Bus Occupancy Generated Successfully";
+	}
 
 }

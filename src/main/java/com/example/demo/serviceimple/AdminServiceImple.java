@@ -57,24 +57,21 @@ public class AdminServiceImple implements AdminService {
 	}
 
 	@Override
-	public Admin login(String username, String password) {
+	public Admin login(String usernameOrEmail, String password) {
 
-		Optional<Admin> admin = adminRepository.findByUsername(username);
+		Optional<Admin> admin = adminRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail);
 
 		if (admin.isPresent()) {
 
 			Admin dbAdmin = admin.get();
 
 			if (dbAdmin.getPassword().equals(password)) {
-
 				return dbAdmin;
-
 			}
 
 		}
 
 		return null;
-
 	}
 
 }

@@ -53,7 +53,7 @@ public class AdminController {
 	
 
 	// Save Admin 
-	@PostMapping("/save")
+	@PostMapping("/signup/save")
 	public Admin saveAdmin(@RequestBody Admin admin) {
 		return adminService.saveAdmin(admin);
 	}

@@ -2,30 +2,32 @@ package com.example.demo.serviceimple;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.AttendanceDTO;
 import com.example.demo.dto.BusDetailsDTO;
 import com.example.demo.dto.ChangePasswordDTO;
+import com.example.demo.dto.ComplaintDTO;
+import com.example.demo.dto.NotificationDTO;
+import com.example.demo.dto.RouteDetailsDTO;
+import com.example.demo.models.Attendance;
 import com.example.demo.models.Bus;
+import com.example.demo.models.Complaint;
+import com.example.demo.models.Notification;
+import com.example.demo.models.Route;
+import com.example.demo.models.StudentBusAssignment;
 import com.example.demo.models.student;
 import com.example.demo.repository.AttendanceRepository;
 import com.example.demo.repository.BusRepository;
 import com.example.demo.repository.ComplaintRepository;
 import com.example.demo.repository.NotificationRepository;
 import com.example.demo.repository.RouteRepository;
+import com.example.demo.repository.StudentBusAssignmentRepository;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
-import com.example.demo.dto.RouteDetailsDTO;
-import com.example.demo.models.Route;
-import java.util.stream.Collectors;
-import com.example.demo.dto.AttendanceDTO;
-import com.example.demo.models.Attendance;
-import com.example.demo.dto.NotificationDTO;
-import com.example.demo.models.Notification;
-import com.example.demo.dto.ComplaintDTO;
-import com.example.demo.models.Complaint;
 
 @Service
 public class StudentServiceImple implements StudentService {
@@ -47,6 +49,9 @@ public class StudentServiceImple implements StudentService {
 
 	@Autowired
 	private ComplaintRepository complaintRepository;
+
+	@Autowired
+	private StudentBusAssignmentRepository studentBusAssignmentRepository;
 
 	@Override
 	public student saveStudent(student student) {
@@ -110,17 +115,19 @@ public class StudentServiceImple implements StudentService {
 		return null;
 	}
 
-	// My Bus Details
+	// ========================= MY BUS =========================
+
 	@Override
 	public BusDetailsDTO getBusDetails(Long studentId) {
 
-		student s = studentRepository.findById(studentId).orElse(null);
+		StudentBusAssignment assignment = studentBusAssignmentRepository
+				.findTopByStudentIdOrderByAssignmentIdDesc(studentId).orElse(null);
 
-		if (s == null) {
+		if (assignment == null) {
 			return null;
 		}
 
-		Bus bus = busRepository.findById(s.getBusId()).orElse(null);
+		Bus bus = busRepository.findById(assignment.getBusId()).orElse(null);
 
 		if (bus == null) {
 			return null;
@@ -130,16 +137,19 @@ public class StudentServiceImple implements StudentService {
 				bus.getStatus().toString(), bus.getCurrentStop(), bus.getNextStop());
 	}
 
+	// ========================= MY ROUTE =========================
+
 	@Override
 	public RouteDetailsDTO getRouteDetails(Long studentId) {
 
-		student s = studentRepository.findById(studentId).orElse(null);
+		StudentBusAssignment assignment = studentBusAssignmentRepository
+				.findTopByStudentIdOrderByAssignmentIdDesc(studentId).orElse(null);
 
-		if (s == null) {
+		if (assignment == null) {
 			return null;
 		}
 
-		Route route = routeRepository.findById(s.getRouteId()).orElse(null);
+		Route route = routeRepository.findById(assignment.getRouteId()).orElse(null);
 
 		if (route == null) {
 			return null;
@@ -147,7 +157,6 @@ public class StudentServiceImple implements StudentService {
 
 		return new RouteDetailsDTO(route.getRouteName(), route.getStartPoint(), route.getEndPoint(),
 				route.getDistance().doubleValue());
-
 	}
 
 	@Override
@@ -157,7 +166,6 @@ public class StudentServiceImple implements StudentService {
 
 		return attendanceList.stream().map(a -> new AttendanceDTO(a.getScanTime(), a.getScanType().toString()))
 				.collect(Collectors.toList());
-
 	}
 
 	@Override
@@ -167,7 +175,6 @@ public class StudentServiceImple implements StudentService {
 
 		return notifications.stream().map(n -> new NotificationDTO(n.getTitle(), n.getMessage(), n.getType().toString(),
 				n.getIsRead(), n.getCreatedAt())).collect(Collectors.toList());
-
 	}
 
 	@Override
@@ -177,7 +184,6 @@ public class StudentServiceImple implements StudentService {
 				.findByStudentIdOrderByCreatedAtDesc(studentId).stream().map(c -> new ComplaintDTO(c.getComplaintId(),
 						c.getTitle(), c.getDescription(), c.getStatus().toString(), c.getCreatedAt()))
 				.collect(Collectors.toList());
-
 	}
 
 	@Override
@@ -186,7 +192,6 @@ public class StudentServiceImple implements StudentService {
 		complaint.setCreatedAt(java.time.LocalDateTime.now());
 
 		return complaintRepository.save(complaint);
-
 	}
 
 	@Override
@@ -208,5 +213,4 @@ public class StudentServiceImple implements StudentService {
 
 		return true;
 	}
-
 }

@@ -24,10 +24,10 @@ import org.springframework.http.ResponseEntity;
 public class StudentController {
 
 	@Autowired
-	private StudentService studentService;
+	private StudentService studentService; 
 
 	// Save Student
-	@PostMapping("/save")
+	@PostMapping("/signup/save")
 	public student saveStudent(@RequestBody student student) {
 		return studentService.saveStudent(student);
 	}
@@ -135,5 +135,6 @@ public class StudentController {
 			return ResponseEntity.badRequest().body("Current Password is Incorrect");
 		}
 	}
+	
 
 }

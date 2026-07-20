@@ -14,47 +14,51 @@ import com.example.demo.service.StudentBusAssignmentService;
 @CrossOrigin(origins = "http://localhost:4200")
 public class StudentBusAssignmentController {
 
-    @Autowired
-    private StudentBusAssignmentService studentBusAssignmentService;
+	@Autowired
+	private StudentBusAssignmentService studentBusAssignmentService;
 
-    // Save Student Bus Assignment
-    @PostMapping("/save")
-    public StudentBusAssignment saveStudentBusAssignment(
-            @RequestBody StudentBusAssignment studentBusAssignment) {
+	// Save Student Bus Assignment
+	@PostMapping("/save")
+	public StudentBusAssignment saveStudentBusAssignment(@RequestBody StudentBusAssignment studentBusAssignment) {
 
-        return studentBusAssignmentService.saveStudentBusAssignment(studentBusAssignment);
-    }
+		return studentBusAssignmentService.saveStudentBusAssignment(studentBusAssignment);
+	}
 
-    // Get All Student Bus Assignments
-    @GetMapping("/getall")
-    public List<StudentBusAssignment> getAllStudentBusAssignments() {
+	// Get All Student Bus Assignments
+	@GetMapping("/getall")
+	public List<StudentBusAssignment> getAllStudentBusAssignments() {
 
-        return studentBusAssignmentService.getAllStudentBusAssignments();
-    }
+		return studentBusAssignmentService.getAllStudentBusAssignments();
+	}
 
-    // Get Student Bus Assignment By Id
-    @GetMapping("/get/{id}")
-    public Optional<StudentBusAssignment> getStudentBusAssignmentById(
-            @PathVariable Long id) {
+	// Get Student Bus Assignment By Id
+	@GetMapping("/get/{id}")
+	public Optional<StudentBusAssignment> getStudentBusAssignmentById(@PathVariable Long id) {
 
-        return studentBusAssignmentService.getStudentBusAssignmentById(id);
-    }
+		return studentBusAssignmentService.getStudentBusAssignmentById(id);
+	}
 
-    // Update Student Bus Assignment
-    @PutMapping("/update/{id}")
-    public StudentBusAssignment updateStudentBusAssignment(
-            @PathVariable Long id,
-            @RequestBody StudentBusAssignment studentBusAssignment) {
+	// Update Student Bus Assignment
+	@PutMapping("/update/{id}")
+	public StudentBusAssignment updateStudentBusAssignment(@PathVariable Long id,
+			@RequestBody StudentBusAssignment studentBusAssignment) {
 
-        return studentBusAssignmentService.updateStudentBusAssignment(id, studentBusAssignment);
-    }
+		return studentBusAssignmentService.updateStudentBusAssignment(id, studentBusAssignment);
+	}
 
-    // Delete Student Bus Assignment
-    @DeleteMapping("/delete/{id}")
-    public String deleteStudentBusAssignment(@PathVariable Long id) {
+	// Delete Student Bus Assignment
+	@DeleteMapping("/delete/{id}")
+	public String deleteStudentBusAssignment(@PathVariable Long id) {
 
-        studentBusAssignmentService.deleteStudentBusAssignment(id);
-        return "Student Bus Assignment Deleted Successfully";
-    }
+		studentBusAssignmentService.deleteStudentBusAssignment(id);
+		return "Student Bus Assignment Deleted Successfully";
+	}
+
+	@GetMapping("/student/{studentId}")
+	public Optional<StudentBusAssignment> getAssignmentByStudentId(@PathVariable Long studentId) {
+
+		return studentBusAssignmentService.getAssignmentByStudentId(studentId);
+
+	}
 
 }
