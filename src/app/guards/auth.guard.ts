@@ -19,19 +19,15 @@ export class AuthGuard implements CanActivate {
   ): boolean {
 
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    const role = sessionStorage.getItem('role');
 
-    if (isLoggedIn === 'true') {
-
+    if (isLoggedIn === 'true' && role === 'ADMIN') {
       return true;
-
     }
-
-    alert('Please login first.');
 
     this.router.navigate(['']);
 
     return false;
-
   }
 
 }

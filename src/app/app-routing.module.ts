@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
+import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { StudentComponent } from './pages/student/student.component';
@@ -31,7 +31,6 @@ import { EditComplaintComponent } from './pages/edit-complaint/edit-complaint.co
 import { ComplaintComponent } from './pages/complaint/complaint.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { AddNotificationComponent } from './pages/add-notification/add-notification.component';
-import { StudentLoginComponent } from './pages/student-login/student-login.component';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
 import { StudentLayoutComponent } from './student/student-layout/student-layout.component';
 import { StudentProfileComponent } from './pages/student-profile/student-profile.component';
@@ -42,18 +41,18 @@ import { StudentNotificationComponent } from './pages/student-notification/stude
 import { StudentComplaintComponent } from './pages/student-complaint/student-complaint.component';
 import { StudentChangePasswordComponent } from './pages/student-change-password/student-change-password.component';
 import { StudentAuthGuard } from './guards/student-auth.guard';
+import { BusOccupancyComponent } from './pages/bus-occupancy/bus-occupancy.component';
+import { LiveBusTrackingComponent } from './pages/live-bus-tracking/live-bus-tracking.component';
 
 const routes: Routes = [
 
-  //  Admin Login
   {
     path: '',
     component: LoginComponent
   },
-  // Student Routes
   {
-    path: 'student-login',
-    component: StudentLoginComponent
+    path: 'register',
+    component: RegisterComponent
   },
   // Student Layout
   {
@@ -94,8 +93,6 @@ const routes: Routes = [
         path: 'student-change-password',
         component: StudentChangePasswordComponent
       }
-
-
     ]
   },
 
@@ -247,7 +244,17 @@ const routes: Routes = [
         path: 'add-notification',
         component: AddNotificationComponent,
         canActivate: [AuthGuard]
-      }
+      },
+      {
+        path: 'bus-occupancy',
+        component: BusOccupancyComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'live-bus-tracking',
+        component: LiveBusTrackingComponent,
+        canActivate: [AuthGuard]
+      },
 
     ]
   }

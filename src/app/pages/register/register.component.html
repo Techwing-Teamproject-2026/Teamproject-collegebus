@@ -1,0 +1,97 @@
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+
+        <h2 class="text-center mb-4">
+            User Registration
+        </h2>
+
+        <div class="mb-4">
+
+            <label class="form-label">
+                Register As
+            </label>
+
+            <select class="form-select" [(ngModel)]="role">
+
+                <option value="STUDENT">
+                    Student
+                </option>
+
+                <option value="ADMIN">
+                    Admin
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- ================= STUDENT ================= -->
+
+        <div *ngIf="role=='STUDENT'">
+
+            <input class="form-control mb-3" placeholder="Name" [(ngModel)]="student.name">
+
+            <input class="form-control mb-3" placeholder="Roll Number" [(ngModel)]="student.rollNo">
+
+            <input class="form-control mb-3" placeholder="Email" [(ngModel)]="student.email">
+
+            <input type="password" class="form-control mb-3" placeholder="Password" [(ngModel)]="student.password">
+
+            <input class="form-control mb-3" placeholder="Department" [(ngModel)]="student.department">
+
+            <input type="number" class="form-control mb-3" placeholder="Year" [(ngModel)]="student.year">
+
+            <input class="form-control mb-3" placeholder="Bus Pass Number" [(ngModel)]="student.busPassNumber">
+
+            <input type="number" class="form-control mb-3" placeholder="Route ID" [(ngModel)]="student.routeId">
+
+            <input type="number" class="form-control mb-3" placeholder="Bus ID" [(ngModel)]="student.busId">
+
+            <input class="form-control mb-3" placeholder="Photo URL" [(ngModel)]="student.photoUrl">
+
+        </div>
+
+        <!-- ================= ADMIN ================= -->
+
+        <div *ngIf="role=='ADMIN'">
+
+            <input class="form-control mb-3" placeholder="Username" [(ngModel)]="admin.username">
+
+            <input class="form-control mb-3" placeholder="Full Name" [(ngModel)]="admin.fullName">
+
+            <input class="form-control mb-3" placeholder="Email" [(ngModel)]="admin.email">
+
+            <input type="password" class="form-control mb-3" placeholder="Password" [(ngModel)]="admin.password">
+
+            <select class="form-select mb-3" [(ngModel)]="admin.role">
+
+                <option value="BUS_INCHARGE">
+                    Bus Incharge
+                </option>
+
+                <option value="SUPER_ADMIN">
+                    Super Admin
+                </option>
+
+            </select>
+
+        </div>
+
+        <button class="btn btn-success w-100" (click)="register()">
+
+            Register
+
+        </button>
+
+        <div class="text-center mt-3">
+
+            <a routerLink="/">
+                Already have an account? Login
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

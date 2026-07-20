@@ -12,10 +12,15 @@ export class StudentSidebarComponent {
 
   logout() {
 
-    sessionStorage.clear();
+    const confirmLogout = confirm("Are you sure you want to logout?");
 
-    this.router.navigate(['/student-login']);
+    if (confirmLogout) {
+
+      sessionStorage.clear();
+
+      this.router.navigateByUrl('/', { replaceUrl: true });
+
+    }
 
   }
-
 }

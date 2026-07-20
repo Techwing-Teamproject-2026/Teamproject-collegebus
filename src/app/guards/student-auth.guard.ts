@@ -10,14 +10,16 @@ export class StudentAuthGuard implements CanActivate {
 
     canActivate(): boolean {
 
-        if (sessionStorage.getItem('studentId')) {
+        const studentId = sessionStorage.getItem('studentId');
+        const role = sessionStorage.getItem('role');
+
+        if (studentId && role === 'STUDENT') {
             return true;
         }
 
         this.router.navigate(['/student-login']);
 
         return false;
-
     }
 
 }

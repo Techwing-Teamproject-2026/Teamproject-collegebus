@@ -10,18 +10,14 @@
         <!-- Right Menu -->
         <div class="d-flex align-items-center">
 
-            <button
-                class="btn btn-outline-light me-2"
-                routerLink="/dashboard">
+            <button class="btn btn-outline-light me-2" routerLink="/dashboard">
 
                 <i class="bi bi-speedometer2"></i>
                 Dashboard
 
             </button>
 
-            <button
-                class="btn btn-outline-light me-2"
-                routerLink="/profile">
+            <button class="btn btn-outline-light me-2" routerLink="/profile">
 
                 <i class="bi bi-person-circle"></i>
                 Profile
@@ -30,13 +26,11 @@
 
             <span class="text-white me-3 fw-bold">
 
-                Welcome Admin
+                Welcome {{ username }}
 
             </span>
 
-            <button
-                class="btn btn-danger"
-                (click)="logout()">
+            <button class="btn btn-danger" (click)="logout()">
 
                 <i class="bi bi-box-arrow-right"></i>
                 Logout

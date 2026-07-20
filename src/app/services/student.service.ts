@@ -23,7 +23,7 @@ export class StudentService {
   }
 
   saveStudent(student: Student): Observable<Student> {
-    return this.http.post<Student>(`${this.baseUrl}/save`, student);
+    return this.http.post<Student>(`${this.baseUrl}/signup/save`, student);
   }
   getStudentById(id: number): Observable<Student> {
 

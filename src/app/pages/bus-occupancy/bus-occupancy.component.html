@@ -1,0 +1,300 @@
+<div class="container-fluid mt-4">
+
+    <!-- Dashboard Cards -->
+
+    <div class="row mb-4">
+
+        <div class="col-lg-3 col-md-6 mb-3">
+
+            <div class="card bg-primary text-white shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Buses</h6>
+
+                    <h2>{{ totalBuses }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+
+            <div class="card bg-success text-white shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Occupied Seats</h6>
+
+                    <h2>{{ totalOccupied }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+
+            <div class="card bg-warning text-dark shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Available Seats</h6>
+
+                    <h2>{{ totalAvailable }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+
+            <div class="card bg-danger text-white shadow h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Average Occupancy</h6>
+
+                    <h2>{{ averageOccupancy }}%</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Main Card -->
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h4 class="mb-0">
+
+                <i class="fas fa-bus me-2"></i>
+
+                Bus Crowd Prediction Dashboard
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <!-- Generate -->
+
+            <div class="row mb-4">
+
+                <div class="col-md-4">
+
+                    <label class="form-label fw-bold">
+
+                        Select Bus
+
+                    </label>
+
+                    <select class="form-select" [(ngModel)]="selectedBusId">
+
+                        <option [ngValue]="0">
+
+                            -- Select Bus --
+
+                        </option>
+
+                        <option *ngFor="let bus of buses" [ngValue]="bus.busId">
+
+                            {{ bus.busNo }}
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+
+                    <button class="btn btn-success w-100" (click)="generateOccupancy()">
+
+                        <i class="fas fa-sync-alt me-2"></i>
+
+                        Generate Occupancy
+
+                    </button>
+
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end">
+
+                    <button class="btn btn-primary w-100" (click)="loadOccupancy()">
+
+                        Refresh
+
+                    </button>
+
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+
+                    <input type="text" class="form-control" placeholder="Search Bus Number..." [(ngModel)]="searchText">
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Table -->
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover table-striped align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+
+                            <th>Bus Number</th>
+
+                            <th>Occupied</th>
+
+                            <th>Available</th>
+
+                            <th style="width:220px;">Occupancy %</th>
+
+                            <th>Crowd Level</th>
+
+                            <th>Updated Time</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let occupancy of paginatedOccupancies">
+
+                            <td>
+
+                                {{ getBusNumber(occupancy.busId!) }}
+
+                            </td>
+
+                            <td>
+
+                                {{ occupancy.occupied }}
+
+                            </td>
+
+                            <td>
+
+                                {{ occupancy.available }}
+
+                            </td>
+
+                            <td>
+
+                                <div class="progress">
+
+                                    <div class="progress-bar" role="progressbar"
+                                        [style.width.%]="occupancy.occupancyPercentage ?? 0" [ngClass]="{
+                                        'bg-success': (occupancy.occupancyPercentage ?? 0) < 50,
+                                        'bg-warning': (occupancy.occupancyPercentage ?? 0) >= 50 && (occupancy.occupancyPercentage ?? 0) < 80,
+                                        'bg-danger': (occupancy.occupancyPercentage ?? 0) >= 80
+                                         }">
+
+                                        {{ occupancy.occupancyPercentage ?? 0 }}%
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+
+                                <span class="badge bg-success" *ngIf="occupancy.crowdLevel=='LOW'">
+
+                                    LOW
+
+                                </span>
+
+                                <span class="badge bg-warning text-dark" *ngIf="occupancy.crowdLevel=='MEDIUM'">
+
+                                    MEDIUM
+
+                                </span>
+
+                                <span class="badge bg-danger" *ngIf="occupancy.crowdLevel=='HIGH'">
+
+                                    HIGH
+
+                                </span>
+
+                                <span class="badge bg-dark" *ngIf="occupancy.crowdLevel=='FULL'">
+
+                                    FULL
+
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                {{ occupancy.updatedTime | date:'dd-MMM-yyyy hh:mm a' }}
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- Pagination -->
+
+            <div class="d-flex justify-content-between align-items-center mt-3" *ngIf="filteredOccupancies.length > 0">
+
+                <button class="btn btn-outline-primary" (click)="previousPage()" [disabled]="currentPage==1">
+
+                    Previous
+
+                </button>
+
+                <strong>
+
+                    Page {{ currentPage }} of {{ totalPages }}
+
+                </strong>
+
+                <button class="btn btn-outline-primary" (click)="nextPage()" [disabled]="currentPage==totalPages">
+
+                    Next
+
+                </button>
+
+            </div>
+
+            <div class="text-center mt-4" *ngIf="filteredOccupancies.length==0">
+
+                <h5 class="text-muted">
+
+                    No Occupancy Data Available
+
+                </h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

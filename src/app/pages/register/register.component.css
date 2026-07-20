@@ -1,0 +1,18 @@
+.container {
+    max-width: 700px;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+input,
+select {
+    height: 45px;
+}
+
+button {
+    height: 45px;
+    font-size: 16px;
+    font-weight: 600;
+}

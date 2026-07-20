@@ -14,12 +14,17 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-  // Login API
+  // Register Admin
+  saveAdmin(admin: Admin) {
+    return this.http.post(this.baseUrl + '/signup/save', admin);
+  }
+
+  // Login Admin
   login(admin: Admin): Observable<Admin> {
     return this.http.post<Admin>(`${this.baseUrl}/login`, admin);
   }
 
-  // Dashboard API
+  // Dashboard
   getDashboard(): Observable<Dashboard> {
     return this.http.get<Dashboard>(`${this.baseUrl}/dashboard`);
   }

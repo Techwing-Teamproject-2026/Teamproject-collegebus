@@ -1,0 +1,475 @@
+/* =========================================
+   LIVE BUS TRACKING DASHBOARD
+=========================================*/
+
+.tracking-page {
+    background: #f4f7fc;
+    padding: 15px 22px;
+    min-height: calc(100vh - 80px);
+    overflow: hidden;
+}
+
+/*=========================================
+HEADER
+=========================================*/
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.page-header h2 {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 700;
+    color: #223b67;
+}
+
+.page-header p {
+    margin-top: 6px;
+    margin-bottom: 0;
+    color: #6d7885;
+    font-size: 19px;
+}
+
+.live-badge {
+
+    background: #16a34a;
+
+    color: #fff;
+
+    padding: 12px 22px;
+
+    border-radius: 35px;
+
+    font-weight: 600;
+
+    font-size: 18px;
+
+    box-shadow: 0 8px 20px rgba(22, 163, 74, .25);
+
+}
+
+/*=========================================
+SEARCH
+=========================================*/
+
+.search-card {
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    padding: 18px 22px;
+
+    margin-bottom: 18px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+
+}
+
+.search-row {
+
+    display: flex;
+
+    gap: 20px;
+
+    align-items: end;
+
+}
+
+.search-box {
+
+    flex: 1;
+
+}
+
+.search-box label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-weight: 600;
+
+    color: #23395d;
+
+    font-size: 17px;
+
+}
+
+.search-box select {
+
+    width: 100%;
+
+    height: 56px;
+
+    border-radius: 12px;
+
+    border: 1px solid #d7dde7;
+
+    padding: 0 18px;
+
+    font-size: 17px;
+
+    background: #fff;
+
+    transition: .25s;
+
+}
+
+.search-box select:focus {
+
+    border-color: #2563eb;
+
+    outline: none;
+
+}
+
+.track-btn {
+
+    width: 250px;
+
+    height: 56px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #2563eb;
+
+    color: #fff;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    transition: .3s;
+
+}
+
+.track-btn:hover {
+
+    background: #164ec7;
+
+    transform: translateY(-2px);
+
+}
+
+/*=========================================
+MAIN LAYOUT
+=========================================*/
+
+.content-layout {
+
+    display: grid;
+
+    grid-template-columns: 70% 30%;
+
+    gap: 20px;
+
+    height: calc(100vh - 270px);
+
+}
+
+/*=========================================
+MAP
+=========================================*/
+
+.map-section {
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.card-header {
+
+    padding: 18px 24px;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    color: #23395d;
+
+    border-bottom: 1px solid #edf0f5;
+
+}
+
+#map {
+
+    flex: 1;
+
+    width: 100%;
+
+    min-height: 100%;
+
+}
+
+/*=========================================
+DETAILS PANEL
+=========================================*/
+
+.details-section {
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.details-section .card-header {
+
+    font-size: 30px;
+
+}
+
+.info-card {
+
+    margin: 10px 15px;
+
+    background: #f7f9fd;
+
+    border-left: 6px solid #2563eb;
+
+    border-radius: 14px;
+
+    min-height: 64px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    transition: .25s;
+
+}
+
+.info-card:hover {
+
+    background: #edf3ff;
+
+    transform: translateY(-2px);
+
+}
+
+.label {
+
+    font-size: 18px;
+
+    color: #505b66;
+
+    font-weight: 600;
+
+}
+
+.value {
+
+    font-size: 18px;
+
+    color: #173b72;
+
+    font-weight: 700;
+
+    text-align: right;
+
+}
+
+/*=========================================
+EMPTY
+=========================================*/
+
+.empty-state {
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: #6b7280;
+
+}
+
+.empty-state i {
+
+    font-size: 70px;
+
+    color: #2563eb;
+
+    margin-bottom: 15px;
+
+}
+
+.empty-state h4 {
+
+    margin-bottom: 8px;
+
+    font-size: 30px;
+
+}
+
+/*=========================================
+LEAFLET
+=========================================*/
+
+.leaflet-container {
+
+    font-family: inherit;
+
+}
+
+/* Disable accidental zoom while scrolling */
+
+.leaflet-touch .leaflet-control-zoom {
+
+    margin-top: 15px;
+
+}
+
+.leaflet-popup-content {
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+}
+
+/*=========================================
+SCROLLBAR
+=========================================*/
+
+::-webkit-scrollbar {
+
+    width: 8px;
+
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: #c8d3e6;
+
+    border-radius: 20px;
+
+}
+
+/*=========================================
+RESPONSIVE
+=========================================*/
+
+@media(max-width:1200px) {
+
+    .content-layout {
+
+        grid-template-columns: 1fr;
+
+        height: auto;
+
+    }
+
+    #map {
+
+        height: 500px;
+
+    }
+
+    .details-section {
+
+        margin-top: 15px;
+
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .page-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+    }
+
+    .page-header h2 {
+
+        font-size: 30px;
+
+    }
+
+    .page-header p {
+
+        font-size: 16px;
+
+    }
+
+    .search-row {
+
+        flex-direction: column;
+
+    }
+
+    .track-btn {
+
+        width: 100%;
+
+    }
+
+    .info-card {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        justify-content: center;
+
+        padding: 12px 18px;
+
+        gap: 6px;
+
+        min-height: auto;
+
+    }
+
+    .value {
+
+        text-align: left;
+
+    }
+
+    #map {
+
+        height: 420px;
+
+    }
+
+}

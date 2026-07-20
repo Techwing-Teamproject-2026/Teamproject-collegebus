@@ -8,19 +8,18 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router) { }
+  username: string = '';
+
+  constructor(private router: Router) {
+    this.username = sessionStorage.getItem('username') || 'Admin';
+  }
 
   logout(): void {
 
-    const confirmLogout = confirm("Are you sure you want to logout?");
+    if (confirm('Are you sure you want to logout?')) {
 
-    if (confirmLogout) {
-
-      // Clear session
       sessionStorage.clear();
-      localStorage.clear();
 
-      // Navigate to login
       this.router.navigateByUrl('/', { replaceUrl: true });
 
     }

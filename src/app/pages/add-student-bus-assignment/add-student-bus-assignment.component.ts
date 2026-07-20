@@ -39,15 +39,17 @@ export class AddStudentBusAssignmentComponent implements OnInit {
 
   ngOnInit(): void {
 
+    const today = new Date().toISOString().split('T')[0];
+
     this.assignmentForm = this.fb.group({
 
       studentId: ['', Validators.required],
 
       busId: ['', Validators.required],
 
-      routeId: ['', Validators.required],
+      routeId: [{ value: '', disabled: true }, Validators.required],
 
-      assignedDate: ['', Validators.required],
+      assignedDate: [today, Validators.required],
 
       isActive: [true]
 
@@ -125,6 +127,24 @@ export class AddStudentBusAssignmentComponent implements OnInit {
 
   }
 
+  onBusChange(): void {
+
+    const busId = this.assignmentForm.get('busId')?.value;
+
+    const selectedBus = this.buses.find(bus => bus.busId == busId);
+
+    if (selectedBus) {
+
+      this.assignmentForm.patchValue({
+
+        routeId: selectedBus.routeId
+
+      });
+
+    }
+
+  }
+
   saveAssignment(): void {
 
     if (this.assignmentForm.invalid) {
@@ -137,17 +157,25 @@ export class AddStudentBusAssignmentComponent implements OnInit {
 
     }
 
+    if (!confirm('Are you sure you want to assign this student to the selected bus?')) {
+
+      return;
+
+    }
+
+    const formData = this.assignmentForm.getRawValue();
+
     const assignment: StudentBusAssignment = {
 
-      studentId: this.assignmentForm.value.studentId,
+      studentId: formData.studentId,
 
-      busId: this.assignmentForm.value.busId,
+      busId: formData.busId,
 
-      routeId: this.assignmentForm.value.routeId,
+      routeId: formData.routeId,
 
-      assignedDate: this.assignmentForm.value.assignedDate,
+      assignedDate: formData.assignedDate,
 
-      isActive: this.assignmentForm.value.isActive,
+      isActive: formData.isActive,
 
       createdAt: new Date().toISOString()
 
@@ -158,6 +186,20 @@ export class AddStudentBusAssignmentComponent implements OnInit {
       next: () => {
 
         this.toast.success('Student Bus Assignment Saved Successfully');
+
+        this.assignmentForm.reset({
+
+          studentId: '',
+
+          busId: '',
+
+          routeId: '',
+
+          assignedDate: new Date().toISOString().split('T')[0],
+
+          isActive: true
+
+        });
 
         setTimeout(() => {
 

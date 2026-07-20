@@ -1,0 +1,36 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { BusOccupancy } from '../models/bus-occupancy';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class BusOccupancyService {
+
+    private apiUrl = 'http://localhost:8080/busoccupancy';
+
+    constructor(private http: HttpClient) { }
+
+    // Get All Bus Occupancy
+    getAllOccupancy(): Observable<BusOccupancy[]> {
+        return this.http.get<BusOccupancy[]>(`${this.apiUrl}/getall`);
+    }
+
+    // Get Bus Occupancy By Bus Id
+    getOccupancyByBusId(busId: number): Observable<BusOccupancy> {
+        return this.http.get<BusOccupancy>(`${this.apiUrl}/bus/${busId}`);
+    }
+
+    // Generate Bus Occupancy
+    generateOccupancy(busId: number): Observable<any> {
+        return this.http.post(
+            `${this.apiUrl}/generate/${busId}`,
+            {},
+            {
+                responseType: 'text'
+            }
+        );
+    }
+
+}

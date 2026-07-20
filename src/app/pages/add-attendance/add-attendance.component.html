@@ -14,34 +14,43 @@
 
                 <div class="mb-3">
 
-                    <label class="form-label">Student ID</label>
+                    <label class="form-label">Student</label>
 
-                    <input
-                        type="number"
-                        class="form-control"
-                        formControlName="studentId">
+                    <select class="form-select" formControlName="studentId" (change)="onStudentChange()">
 
+                        <option value="">Select Student</option>
+
+                        <option *ngFor="let student of students" [value]="student.studentId">
+
+                            {{student.name}} ({{student.rollNo}})
+
+                        </option>
+
+                    </select>
                 </div>
 
                 <div class="mb-3">
 
-                    <label class="form-label">Bus ID</label>
+                    <label class="form-label">Bus</label>
 
-                    <input
-                        type="number"
-                        class="form-control"
-                        formControlName="busId">
+                    <select class="form-select" formControlName="busId">
 
+                        <option value="">Select Bus</option>
+
+                        <option *ngFor="let bus of buses" [value]="bus.busId">
+
+                            {{bus.busNo}}
+
+                        </option>
+
+                    </select>
                 </div>
 
                 <div class="mb-3">
 
                     <label class="form-label">Scan Time</label>
 
-                    <input
-                        type="datetime-local"
-                        class="form-control"
-                        formControlName="scanTime">
+                    <input type="datetime-local" class="form-control" formControlName="scanTime">
 
                 </div>
 
@@ -49,9 +58,7 @@
 
                     <label class="form-label">Scan Type</label>
 
-                    <select
-                        class="form-select"
-                        formControlName="scanType">
+                    <select class="form-select" formControlName="scanType">
 
                         <option value="">Select Scan Type</option>
 
@@ -67,18 +74,13 @@
 
                 </div>
 
-                <button
-                    type="submit"
-                    class="btn btn-success me-2">
+                <button type="submit" class="btn btn-success me-2">
 
                     Save Attendance
 
                 </button>
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    routerLink="/attendance">
+                <button type="button" class="btn btn-secondary" routerLink="/attendance">
 
                     Cancel
 

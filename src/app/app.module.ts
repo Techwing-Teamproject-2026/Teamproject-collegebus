@@ -42,7 +42,7 @@ import { EditStopComponent } from './pages/edit-stop/edit-stop.component';
 import { AddComplaintComponent } from './pages/add-complaint/add-complaint.component';
 import { EditComplaintComponent } from './pages/edit-complaint/edit-complaint.component';
 import { AddNotificationComponent } from './pages/add-notification/add-notification.component';
-import { StudentLoginComponent } from './pages/student-login/student-login.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
 import { StudentLayoutComponent } from './student/student-layout/student-layout.component';
 import { StudentNavbarComponent } from './student/student-navbar/student-navbar.component';
@@ -54,6 +54,8 @@ import { StudentAttendanceComponent } from './pages/student-attendance/student-a
 import { StudentNotificationComponent } from './pages/student-notification/student-notification.component';
 import { StudentComplaintComponent } from './pages/student-complaint/student-complaint.component';
 import { StudentChangePasswordComponent } from './pages/student-change-password/student-change-password.component';
+import { BusOccupancyComponent } from './pages/bus-occupancy/bus-occupancy.component';
+import { LiveBusTrackingComponent } from './pages/live-bus-tracking/live-bus-tracking.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +94,7 @@ import { StudentChangePasswordComponent } from './pages/student-change-password/
     AddComplaintComponent,
     EditComplaintComponent,
     AddNotificationComponent,
-    StudentLoginComponent,
+    RegisterComponent,
     StudentDashboardComponent,
     StudentLayoutComponent,
     StudentNavbarComponent,
@@ -104,6 +106,8 @@ import { StudentChangePasswordComponent } from './pages/student-change-password/
     StudentNotificationComponent,
     StudentComplaintComponent,
     StudentChangePasswordComponent,
+    BusOccupancyComponent,
+    LiveBusTrackingComponent,
   ],
   imports: [
     BrowserModule,

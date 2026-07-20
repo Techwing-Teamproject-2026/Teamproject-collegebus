@@ -1,0 +1,157 @@
+<div class="tracking-page">
+
+    <!-- Header -->
+    <div class="page-header">
+
+        <div>
+            <h2><i class="bi bi-geo-alt-fill"></i> Live Bus Tracking</h2>
+            <p>Monitor the live location and status of college buses.</p>
+        </div>
+
+        <div class="live-badge">
+            <i class="bi bi-broadcast-pin"></i>
+            LIVE
+        </div>
+
+    </div>
+
+    <!-- Search Card -->
+    <div class="search-card">
+
+        <div class="search-row">
+
+            <div class="search-box">
+
+                <label>Select Bus</label>
+
+                <select [(ngModel)]="selectedBus">
+
+                    <option value="">-- Select Bus --</option>
+
+                    <option *ngFor="let bus of buses" [value]="bus.busNo">
+                        {{bus.busNo}}
+                    </option>
+
+                </select>
+
+            </div>
+
+            <button class="track-btn" (click)="trackBus()">
+                <i class="bi bi-search"></i>
+                Track Bus
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Main Layout -->
+    <div class="content-layout">
+
+        <!-- Map -->
+        <div class="map-section">
+
+            <div class="card-header">
+                <i class="bi bi-map"></i>
+                Live Bus Location
+            </div>
+
+            <div id="map"></div>
+
+        </div>
+
+        <!-- Bus Details -->
+        <div class="details-section">
+
+            <div class="card-header">
+                <i class="bi bi-info-circle-fill"></i>
+                Bus Information
+            </div>
+
+            <div *ngIf="tracking; else noBus">
+
+                <div class="info-card">
+
+                    <span class="label">Bus Number</span>
+
+                    <span class="value">{{selectedBus}}</span>
+
+                </div>
+
+                <div class="info-card">
+
+                    <span class="label">Speed</span>
+
+                    <span class="value">{{tracking.currentSpeed}} km/h</span>
+
+                </div>
+
+                <div class="info-card">
+
+                    <span class="label">Current Stop</span>
+
+                    <span class="value">{{tracking.currentStop}}</span>
+
+                </div>
+
+                <div class="info-card">
+
+                    <span class="label">Next Stop</span>
+
+                    <span class="value">{{tracking.nextStop}}</span>
+
+                </div>
+
+                <div class="info-card">
+
+                    <span class="label">ETA</span>
+
+                    <span class="value">{{tracking.etaMinutes}} Minutes</span>
+
+                </div>
+
+                <div class="info-card">
+
+                    <span class="label">Updated</span>
+
+                    <span class="value">{{tracking.trackingTime}}</span>
+
+                </div>
+
+                <div class="info-card">
+
+                    <span class="label">Latitude</span>
+
+                    <span class="value">{{tracking.latitude}}</span>
+
+                </div>
+
+                <div class="info-card">
+
+                    <span class="label">Longitude</span>
+
+                    <span class="value">{{tracking.longitude}}</span>
+
+                </div>
+
+            </div>
+
+            <ng-template #noBus>
+
+                <div class="empty-state">
+
+                    <i class="bi bi-bus-front"></i>
+
+                    <h4>No Bus Selected</h4>
+
+                    <p>Select a bus to start tracking.</p>
+
+                </div>
+
+            </ng-template>
+
+        </div>
+
+    </div>
+
+</div>

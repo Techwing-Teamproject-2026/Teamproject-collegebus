@@ -15,39 +15,34 @@ export class BusService {
 
   // Get All Buses
   getAllBuses(): Observable<Bus[]> {
-
     return this.http.get<Bus[]>(`${this.baseUrl}/getall`);
-
   }
 
   // Get Bus By Id
   getBusById(id: number): Observable<Bus> {
-
     return this.http.get<Bus>(`${this.baseUrl}/get/${id}`);
+  }
 
+  // Get Bus By Bus Number
+  getBusByBusNo(busNo: string): Observable<Bus> {
+    return this.http.get<Bus>(`${this.baseUrl}/busno/${busNo}`);
   }
 
   // Save Bus
   saveBus(bus: Bus): Observable<Bus> {
-
     return this.http.post<Bus>(`${this.baseUrl}/save`, bus);
-
   }
 
   // Update Bus
   updateBus(id: number, bus: Bus): Observable<Bus> {
-
     return this.http.put<Bus>(`${this.baseUrl}/update/${id}`, bus);
-
   }
 
   // Delete Bus
   deleteBus(id: number): Observable<any> {
-
     return this.http.delete(`${this.baseUrl}/delete/${id}`, {
       responseType: 'text'
     });
-
   }
 
 }

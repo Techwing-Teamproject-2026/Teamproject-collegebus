@@ -1,31 +1,30 @@
 <div class="container mt-5">
 
-  <div class="card p-4">
+  <div class="card p-4 shadow">
 
-    <h2>Admin Login</h2>
+    <h2 class="text-center mb-4">Bus Crowd Prediction System</h2>
 
-    <input
-      class="form-control"
-      placeholder="Username"
-      [(ngModel)]="admin.username">
+    <h5 class="text-center text-muted mb-4">
+      Admin & Student Login
+    </h5>
 
-    <br>
+    <input class="form-control mb-3" placeholder="Username (Admin) or Email (Student)" [(ngModel)]="username">
 
-    <input
-      type="password"
-      class="form-control"
-      placeholder="Password"
-      [(ngModel)]="admin.password">
+    <input type="password" class="form-control mb-3" placeholder="Password" [(ngModel)]="password">
 
-    <br>
-
-    <button class="btn btn-primary" (click)="login()">
+    <button class="btn btn-primary w-100" (click)="login()">
       Login
     </button>
 
-    <br>
+    <div class="text-center mt-3">
+      <a routerLink="/register">
+        New User? Register Here
+      </a>
+    </div>
 
-    <p style="color:red">{{message}}</p>
+    <p class="text-danger text-center mt-3">
+      {{message}}
+    </p>
 
   </div>
 

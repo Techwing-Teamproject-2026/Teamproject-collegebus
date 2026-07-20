@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
+import { StudentService } from '../../services/student.service';
 import { Admin } from '../../models/admin';
 import { ToastService } from '../../services/toast.service';
 
@@ -11,53 +12,105 @@ import { ToastService } from '../../services/toast.service';
 })
 export class LoginComponent {
 
-  admin: Admin = {
-    username: '',
-    password: ''
-  };
-
+  username = '';
+  password = '';
   message = '';
 
   constructor(
     private adminService: AdminService,
+    private studentService: StudentService,
     private router: Router,
     private toast: ToastService
   ) { }
 
   login() {
 
-    if (!this.admin.username || !this.admin.password) {
-
-      this.message = "Please enter Username and Password";
-      this.toast.warning('Please enter Username and Password');
+    if (!this.username || !this.password) {
+      this.message = 'Please enter Username/Email and Password';
+      this.toast.warning('Please enter Username/Email and Password');
       return;
-
     }
 
-    this.adminService.login(this.admin).subscribe({
+    const admin: Admin = {
+      username: this.username,
+      password: this.password
+    };
+
+    this.adminService.login(admin).subscribe({
 
       next: (response) => {
 
-        console.log(response);
+        // Admin login successful
+        if (response) {
 
-        // Store login session
-        sessionStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.clear();
 
-        // Store logged-in username
-        sessionStorage.setItem('username', this.admin.username);
+          sessionStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.setItem('role', 'ADMIN');
+          sessionStorage.setItem('username', response.username);
+          sessionStorage.setItem('loginTime', new Date().toISOString());
 
-        this.toast.success('Login Successful');
+          this.toast.success('Admin Login Successful');
 
-        this.router.navigateByUrl('/dashboard', { replaceUrl: true });
+          this.router.navigateByUrl('/dashboard', {
+            replaceUrl: true
+          });
+
+          return;
+        }
+
+        // Admin not found -> Try Student Login
+        this.tryStudentLogin();
 
       },
 
-      error: (error) => {
+      error: () => {
 
-        console.log(error);
+        // Admin API error -> Try Student Login
+        this.tryStudentLogin();
 
-        this.message = "Invalid Username or Password";
-        this.toast.error('Invalid Username or Password');
+      }
+
+    });
+
+  }
+
+  private tryStudentLogin() {
+
+    this.studentService.login(this.username, this.password).subscribe({
+
+      next: (student) => {
+
+        if (student) {
+
+          sessionStorage.clear();
+
+          sessionStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.setItem('role', 'STUDENT');
+          sessionStorage.setItem('student', JSON.stringify(student));
+          sessionStorage.setItem('studentId', student.studentId!.toString());
+          sessionStorage.setItem('studentName', student.name!);
+          sessionStorage.setItem('studentEmail', student.email!);
+
+          this.toast.success('Student Login Successful');
+
+          this.router.navigateByUrl('/student-dashboard', {
+            replaceUrl: true
+          });
+
+        } else {
+
+          this.message = 'Invalid Username/Email or Password';
+          this.toast.error('Invalid Username/Email or Password');
+
+        }
+
+      },
+
+      error: () => {
+
+        this.message = 'Invalid Username/Email or Password';
+        this.toast.error('Invalid Username/Email or Password');
 
       }
 
