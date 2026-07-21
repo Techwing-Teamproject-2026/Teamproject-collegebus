@@ -15,7 +15,7 @@ import com.example.demo.dto.ComplaintDTO;
 import com.example.demo.dto.RouteDetailsDTO;
 import com.example.demo.dto.AttendanceDTO;
 import com.example.demo.dto.NotificationDTO;
-import com.example.demo.dto.ChangePasswordDTO;
+import com.example.demo.dto.StudentChangePasswordDTO;
 import org.springframework.http.ResponseEntity;
 import java.io.IOException;
 import org.springframework.web.multipart.MultipartFile;
@@ -130,7 +130,7 @@ public class StudentController {
 	}
 
 	@PostMapping("/change-password")
-	public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO dto) {
+	public ResponseEntity<String> changePassword(@RequestBody StudentChangePasswordDTO dto) {
 
 		boolean changed = studentService.changePassword(dto);
 

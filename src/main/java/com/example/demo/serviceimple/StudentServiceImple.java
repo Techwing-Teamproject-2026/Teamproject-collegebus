@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.AttendanceDTO;
 import com.example.demo.dto.BusDetailsDTO;
-import com.example.demo.dto.ChangePasswordDTO;
+import com.example.demo.dto.StudentChangePasswordDTO;
 import com.example.demo.dto.ComplaintDTO;
 import com.example.demo.dto.NotificationDTO;
 import com.example.demo.dto.RouteDetailsDTO;
@@ -207,8 +207,7 @@ public class StudentServiceImple implements StudentService {
 	}
 
 	@Override
-	public boolean changePassword(ChangePasswordDTO dto) {
-
+	public boolean changePassword(StudentChangePasswordDTO dto) {
 		student s = studentRepository.findById(dto.getStudentId()).orElse(null);
 
 		if (s == null) {

@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.example.demo.models.student;
 import com.example.demo.dto.BusDetailsDTO;
-import com.example.demo.dto.ChangePasswordDTO;
+import com.example.demo.dto.StudentChangePasswordDTO;
 import com.example.demo.dto.RouteDetailsDTO;
 import com.example.demo.dto.AttendanceDTO;
 import com.example.demo.dto.NotificationDTO;
@@ -41,10 +41,10 @@ public interface StudentService {
 
 	Complaint saveComplaint(Complaint complaint);
 
-	boolean changePassword(ChangePasswordDTO dto);
+	boolean changePassword(StudentChangePasswordDTO dto);
 
 	String uploadPhoto(Long studentId, MultipartFile file) throws IOException;
-	
+
 	void sendOtp(String email);
 
 	boolean verifyOtp(String email, String otp);
