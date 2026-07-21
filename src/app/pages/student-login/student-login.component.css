@@ -1,0 +1,115 @@
+body {
+
+    margin: 0;
+
+}
+
+.login-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        linear-gradient(135deg, #eefbf6, #ffffff, #eef8ff);
+
+}
+
+.login-card {
+
+    width: 520px;
+
+    background: white;
+
+    padding: 45px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .12);
+
+}
+
+.icon-box {
+
+    width: 90px;
+
+    height: 90px;
+
+    margin: auto;
+
+    border-radius: 25px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+.student {
+
+    background: #ecfff5;
+
+}
+
+.student i {
+
+    font-size: 45px;
+
+    color: #17b978;
+
+}
+
+h1 {
+
+    text-align: center;
+
+    font-weight: 700;
+
+}
+
+p {
+
+    text-align: center;
+
+    color: #6b7280;
+
+    margin-bottom: 35px;
+
+}
+
+.form-control {
+
+    height: 58px;
+
+}
+
+.student-btn {
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    font-size: 20px;
+
+    color: white;
+
+    background:
+        linear-gradient(90deg, #19c37d, #4f46e5);
+
+}
+
+.student-btn:hover {
+
+    transform: translateY(-2px);
+
+}

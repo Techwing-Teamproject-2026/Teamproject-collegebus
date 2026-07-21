@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './pages/register/register.component';
-import { LoginComponent } from './pages/login/login.component';
+import { AdminLoginComponent } from './pages/adminlogin/adminlogin.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { StudentComponent } from './pages/student/student.component';
 import { AddStudentComponent } from './pages/add-student/add-student.component';
@@ -43,16 +43,26 @@ import { StudentChangePasswordComponent } from './pages/student-change-password/
 import { StudentAuthGuard } from './guards/student-auth.guard';
 import { BusOccupancyComponent } from './pages/bus-occupancy/bus-occupancy.component';
 import { LiveBusTrackingComponent } from './pages/live-bus-tracking/live-bus-tracking.component';
+import { StudentLoginComponent } from './pages/student-login/student-login.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 const routes: Routes = [
 
   {
     path: '',
-    component: LoginComponent
+    component: AdminLoginComponent
   },
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'student-login',
+    component: StudentLoginComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
   },
   // Student Layout
   {

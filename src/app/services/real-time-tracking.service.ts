@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RealTimeTrackingService {
 
-    private apiUrl = 'http://localhost:8080/realtimetracking';
+    private apiUrl = 'http://localhost:8085/realtimetracking';
 
     constructor(private http: HttpClient) { }
 

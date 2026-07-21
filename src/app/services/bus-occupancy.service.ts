@@ -8,7 +8,7 @@ import { BusOccupancy } from '../models/bus-occupancy';
 })
 export class BusOccupancyService {
 
-    private apiUrl = 'http://localhost:8080/busoccupancy';
+    private apiUrl = 'http://localhost:8085/busoccupancy';
 
     constructor(private http: HttpClient) { }
 

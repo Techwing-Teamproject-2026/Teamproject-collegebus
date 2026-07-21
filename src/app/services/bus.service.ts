@@ -9,7 +9,7 @@ import { Bus } from '../models/bus';
 })
 export class BusService {
 
-  private baseUrl = 'http://localhost:8080/bus';
+  private baseUrl = 'http://localhost:8085/bus';
 
   constructor(private http: HttpClient) { }
 

@@ -8,7 +8,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { LoginComponent } from './pages/login/login.component';
+import { AdminLoginComponent } from './pages/adminlogin/adminlogin.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { StudentComponent } from './pages/student/student.component';
 import { DriverComponent } from './pages/driver/driver.component';
@@ -56,6 +56,8 @@ import { StudentComplaintComponent } from './pages/student-complaint/student-com
 import { StudentChangePasswordComponent } from './pages/student-change-password/student-change-password.component';
 import { BusOccupancyComponent } from './pages/bus-occupancy/bus-occupancy.component';
 import { LiveBusTrackingComponent } from './pages/live-bus-tracking/live-bus-tracking.component';
+import { StudentLoginComponent } from './pages/student-login/student-login.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,7 @@ import { LiveBusTrackingComponent } from './pages/live-bus-tracking/live-bus-tra
     SidebarComponent,
     FooterComponent,
     AdminLayoutComponent,
-    LoginComponent,
+    AdminLoginComponent,
     DashboardComponent,
     StudentComponent,
     DriverComponent,
@@ -108,6 +110,8 @@ import { LiveBusTrackingComponent } from './pages/live-bus-tracking/live-bus-tra
     StudentChangePasswordComponent,
     BusOccupancyComponent,
     LiveBusTrackingComponent,
+    StudentLoginComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

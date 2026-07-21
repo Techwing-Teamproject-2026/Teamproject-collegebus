@@ -14,7 +14,7 @@ import { ChangePassword } from '../models/change-password';
 })
 export class StudentService {
 
-  private baseUrl = "http://localhost:8080/student";
+  private baseUrl = "http://localhost:8085/student";
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +25,7 @@ export class StudentService {
   saveStudent(student: Student): Observable<Student> {
     return this.http.post<Student>(`${this.baseUrl}/signup/save`, student);
   }
+
   getStudentById(id: number): Observable<Student> {
 
     return this.http.get<Student>(`${this.baseUrl}/get/${id}`);
@@ -32,6 +33,15 @@ export class StudentService {
   }
   updateStudent(id: number, student: Student): Observable<Student> {
     return this.http.put<Student>(`${this.baseUrl}/update/${id}`, student);
+  }
+  uploadPhoto(id: number, formData: FormData) {
+
+    return this.http.post(
+      `${this.baseUrl}/upload-photo/${id}`,
+      formData,
+      { responseType: 'text' }
+    );
+
   }
   deleteStudent(id: number) {
     return this.http.delete(`${this.baseUrl}/delete/${id}`, {
@@ -96,6 +106,35 @@ export class StudentService {
     return this.http.post(
       this.baseUrl + "/change-password",
       data,
+      { responseType: 'text' }
+    );
+
+  }
+  sendOtp(email: string) {
+
+    return this.http.post(
+      `${this.baseUrl}/send-otp`,
+      { email },
+      { responseType: 'text' }
+    );
+
+  }
+
+  verifyOtp(email: string, otp: string) {
+
+    return this.http.post(
+      `${this.baseUrl}/verify-otp`,
+      { email, otp },
+      { responseType: 'text' }
+    );
+
+  }
+
+  resetPassword(email: string, newPassword: string) {
+
+    return this.http.post(
+      `${this.baseUrl}/reset-password`,
+      { email, newPassword },
       { responseType: 'text' }
     );
 

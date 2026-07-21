@@ -10,7 +10,7 @@ import { Dashboard } from '../models/dashboard';
 })
 export class AdminService {
 
-  private baseUrl = 'http://localhost:8080/admin';
+  private baseUrl = 'http://localhost:8085/admin';
 
   constructor(private http: HttpClient) { }
 

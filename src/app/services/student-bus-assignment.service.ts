@@ -9,7 +9,7 @@ import { StudentBusAssignment } from '../models/student-bus-assignment';
 })
 export class StudentBusAssignmentService {
 
-    private baseUrl = "http://localhost:8080/studentbusassignment";
+    private baseUrl = "http://localhost:8085/studentbusassignment";
 
     constructor(private http: HttpClient) { }
 

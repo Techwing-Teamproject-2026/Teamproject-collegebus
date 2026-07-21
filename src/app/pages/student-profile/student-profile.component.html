@@ -1,51 +1,240 @@
-<div class="container mt-4">
+<div class="profile-page" *ngIf="student">
 
-    <div class="card shadow">
+    <div class="profile-container">
 
-        <div class="card-header bg-primary text-white">
+        <!-- ================= LEFT PROFILE CARD ================= -->
 
-            <h4>My Profile</h4>
+        <div class="profile-card">
+
+            <div class="profile-image" (click)="fileInput.click()">
+
+                <img *ngIf="student.photoUrl" [src]="imagePreview" class="avatar">
+
+                <div *ngIf="!student.photoUrl" class="upload-placeholder">
+
+                    <i class="bi bi-camera-fill"></i>
+
+                    <span>Click to<br>Add Photo</span>
+
+                </div>
+
+                <div class="camera-icon">
+
+                    <i class="bi bi-camera-fill"></i>
+
+                </div>
+
+                <input #fileInput type="file" hidden accept="image/*" (change)="selectImage($event)">
+
+            </div>
+
+            <h3>{{student.name}}</h3>
+
+            <p class="text-muted">
+
+                {{student.rollNo}}
+
+            </p>
+
+            <div class="badge bg-primary mb-2">
+
+                {{student.department}}
+
+            </div>
+
+            <div class="badge bg-success mb-4">
+
+                Year {{student.year}}
+
+            </div>
+
+            <div class="d-grid gap-2">
+
+                <button *ngIf="!editMode" class="btn btn-primary" (click)="editProfile()">
+
+                    <i class="bi bi-pencil-square me-2"></i>
+
+                    Edit Profile
+
+                </button>
+
+                <button *ngIf="editMode" class="btn btn-success" (click)="saveProfile()">
+
+                    <i class="bi bi-check-circle me-2"></i>
+
+                    Save Changes
+
+                </button>
+
+                <button *ngIf="editMode" class="btn btn-outline-danger" (click)="cancelEdit()">
+
+                    <i class="bi bi-x-circle me-2"></i>
+
+                    Cancel
+
+                </button>
+
+            </div>
 
         </div>
 
-        <div class="card-body">
+        <!-- ================= RIGHT DETAILS ================= -->
 
-            <table class="table table-bordered">
+        <div class="details-card">
 
-                <tr>
-                    <th>Name</th>
-                    <td>{{student.name}}</td>
-                </tr>
+            <!-- PERSONAL -->
 
-                <tr>
-                    <th>Email</th>
-                    <td>{{student.email}}</td>
-                </tr>
+            <div class="section-card">
 
-                <tr>
-                    <th>Roll Number</th>
-                    <td>{{student.rollNo}}</td>
-                </tr>
+                <h4>
 
-                <tr>
-                    <th>Department</th>
-                    <td>{{student.department}}</td>
-                </tr>
+                    <i class="bi bi-person-fill me-2"></i>
 
-                <tr>
-                    <th>Year</th>
-                    <td>{{student.year}}</td>
-                </tr>
+                    Personal Information
 
-                <tr>
-                    <th>Bus Pass Number</th>
-                    <td>{{student.busPassNumber}}</td>
-                </tr>
+                </h4>
 
-            </table>
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Full Name</label>
+
+                        <input class="form-control" [(ngModel)]="student.name" [readonly]="!editMode">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Email</label>
+
+                        <input class="form-control" [(ngModel)]="student.email" [readonly]="!editMode">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Roll Number</label>
+
+                        <input class="form-control" [(ngModel)]="student.rollNo" readonly>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Bus Pass Number</label>
+
+                        <input class="form-control" [(ngModel)]="student.busPassNumber" [readonly]="!editMode">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ACADEMIC -->
+
+            <div class="section-card mt-4">
+
+                <h4>
+
+                    <i class="bi bi-mortarboard-fill me-2"></i>
+
+                    Academic Information
+
+                </h4>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <label>Department</label>
+
+                        <select class="form-select" [(ngModel)]="student.department" [disabled]="!editMode">
+
+                            <option *ngFor="let d of departments" [value]="d">
+
+                                {{d}}
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label>Year</label>
+
+                        <select class="form-select" [(ngModel)]="student.year" [disabled]="!editMode">
+
+                            <option *ngFor="let y of years" [value]="y">
+
+                                {{y}}
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TRANSPORT -->
+
+            <div class="section-card mt-4">
+
+                <h4>
+
+                    <i class="bi bi-bus-front-fill me-2"></i>
+
+                    Transport Information
+
+                </h4>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <label>Route</label>
+
+                        <select class="form-select" [(ngModel)]="student.routeId" [disabled]="!editMode">
+
+                            <option *ngFor="let route of routes" [ngValue]="route.routeId">
+
+                                {{route.routeName}}
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label>Bus</label>
+
+                        <select class="form-select" [(ngModel)]="student.busId" [disabled]="!editMode">
+
+                            <option *ngFor="let bus of buses" [ngValue]="bus.busId">
+
+                                {{bus.busNo}}
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
     </div>
+
 
 </div>
