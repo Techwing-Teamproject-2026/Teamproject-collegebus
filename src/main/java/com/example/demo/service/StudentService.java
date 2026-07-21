@@ -11,6 +11,8 @@ import com.example.demo.dto.AttendanceDTO;
 import com.example.demo.dto.NotificationDTO;
 import com.example.demo.dto.ComplaintDTO;
 import com.example.demo.models.Complaint;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 
 public interface StudentService {
 
@@ -40,5 +42,13 @@ public interface StudentService {
 	Complaint saveComplaint(Complaint complaint);
 
 	boolean changePassword(ChangePasswordDTO dto);
+
+	String uploadPhoto(Long studentId, MultipartFile file) throws IOException;
+	
+	void sendOtp(String email);
+
+	boolean verifyOtp(String email, String otp);
+
+	boolean resetPassword(String email, String newPassword);
 
 }

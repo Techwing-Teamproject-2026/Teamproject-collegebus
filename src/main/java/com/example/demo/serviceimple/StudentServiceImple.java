@@ -28,6 +28,15 @@ import com.example.demo.repository.RouteRepository;
 import com.example.demo.repository.StudentBusAssignmentRepository;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import org.springframework.web.multipart.MultipartFile;
+import java.time.LocalDateTime;
+import java.util.Random;
 
 @Service
 public class StudentServiceImple implements StudentService {
@@ -52,6 +61,9 @@ public class StudentServiceImple implements StudentService {
 
 	@Autowired
 	private StudentBusAssignmentRepository studentBusAssignmentRepository;
+
+	@Autowired
+	private EmailService emailService;
 
 	@Override
 	public student saveStudent(student student) {
@@ -208,6 +220,93 @@ public class StudentServiceImple implements StudentService {
 		}
 
 		s.setPassword(dto.getNewPassword());
+
+		studentRepository.save(s);
+
+		return true;
+	}
+
+	@Override
+	public String uploadPhoto(Long studentId, MultipartFile file) throws IOException {
+
+		student s = studentRepository.findById(studentId).orElse(null);
+
+		if (s == null) {
+			return "Student Not Found";
+		}
+
+		String uploadDir = "uploads/";
+
+		Files.createDirectories(Paths.get(uploadDir));
+
+		String fileName = studentId + "_" + file.getOriginalFilename();
+
+		Path filePath = Paths.get(uploadDir, fileName);
+
+		Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+		s.setPhotoUrl(fileName);
+
+		studentRepository.save(s);
+
+		return fileName;
+	}
+
+	@Override
+	public void sendOtp(String email) {
+
+		student s = studentRepository.findByEmail(email).orElse(null);
+
+		if (s == null) {
+			throw new RuntimeException("Email not found");
+		}
+
+		String otp = String.format("%06d", new Random().nextInt(999999));
+
+		s.setOtp(otp);
+		s.setOtpExpiry(LocalDateTime.now().plusMinutes(5));
+
+		studentRepository.save(s);
+
+		emailService.sendOtpEmail(email, otp);
+	}
+
+	@Override
+	public boolean verifyOtp(String email, String otp) {
+
+		student s = studentRepository.findByEmail(email).orElse(null);
+
+		if (s == null) {
+			return false;
+		}
+
+		if (s.getOtp() == null) {
+			return false;
+		}
+
+		if (!s.getOtp().equals(otp)) {
+			return false;
+		}
+
+		if (s.getOtpExpiry().isBefore(LocalDateTime.now())) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public boolean resetPassword(String email, String newPassword) {
+
+		student s = studentRepository.findByEmail(email).orElse(null);
+
+		if (s == null) {
+			return false;
+		}
+
+		s.setPassword(newPassword);
+		s.setOtp(null);
+		s.setOtpExpiry(null);
 
 		studentRepository.save(s);
 

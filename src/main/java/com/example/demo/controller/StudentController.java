@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.models.Complaint;
 import com.example.demo.models.student;
 import com.example.demo.service.StudentService;
-import com.example.demo.dto.BusDetailsDTO; 
+import com.example.demo.dto.BusDetailsDTO;
 import com.example.demo.dto.ComplaintDTO;
 import com.example.demo.dto.RouteDetailsDTO;
 import com.example.demo.dto.AttendanceDTO;
 import com.example.demo.dto.NotificationDTO;
 import com.example.demo.dto.ChangePasswordDTO;
 import org.springframework.http.ResponseEntity;
+import java.io.IOException;
+import org.springframework.web.multipart.MultipartFile;
+import com.example.demo.dto.ForgotPasswordDTO;
+import com.example.demo.dto.VerifyOtpDTO;
+import com.example.demo.dto.ResetPasswordDTO;
 
 @RestController
 @RequestMapping("/student")
@@ -24,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 public class StudentController {
 
 	@Autowired
-	private StudentService studentService; 
+	private StudentService studentService;
 
 	// Save Student
 	@PostMapping("/signup/save")
@@ -135,6 +140,48 @@ public class StudentController {
 			return ResponseEntity.badRequest().body("Current Password is Incorrect");
 		}
 	}
-	
+
+	@PostMapping("/upload-photo/{id}")
+	public ResponseEntity<String> uploadPhoto(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
+
+		try {
+			String fileName = studentService.uploadPhoto(id, file);
+			return ResponseEntity.ok(fileName);
+		} catch (IOException e) {
+			return ResponseEntity.badRequest().body("Upload Failed");
+		}
+	}
+
+	@PostMapping("/send-otp")
+	public ResponseEntity<String> sendOtp(@RequestBody ForgotPasswordDTO dto) {
+
+		studentService.sendOtp(dto.getEmail());
+
+		return ResponseEntity.ok("OTP Sent Successfully");
+	}
+
+	@PostMapping("/verify-otp")
+	public ResponseEntity<String> verifyOtp(@RequestBody VerifyOtpDTO dto) {
+
+		boolean verified = studentService.verifyOtp(dto.getEmail(), dto.getOtp());
+
+		if (verified) {
+			return ResponseEntity.ok("OTP Verified");
+		} else {
+			return ResponseEntity.badRequest().body("Invalid or Expired OTP");
+		}
+	}
+
+	@PostMapping("/reset-password")
+	public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordDTO dto) {
+
+		boolean reset = studentService.resetPassword(dto.getEmail(), dto.getNewPassword());
+
+		if (reset) {
+			return ResponseEntity.ok("Password Reset Successfully");
+		} else {
+			return ResponseEntity.badRequest().body("Password Reset Failed");
+		}
+	}
 
 }
