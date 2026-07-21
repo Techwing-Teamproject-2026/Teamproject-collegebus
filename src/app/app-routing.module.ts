@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './pages/register/register.component';
 import { AdminLoginComponent } from './pages/adminlogin/adminlogin.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DashboardComponent } from './pages/admindashboard/dashboard.component';
 import { StudentComponent } from './pages/student/student.component';
 import { AddStudentComponent } from './pages/add-student/add-student.component';
 import { EditStudentComponent } from './pages/edit-student/edit-student.component';
@@ -44,7 +44,10 @@ import { StudentAuthGuard } from './guards/student-auth.guard';
 import { BusOccupancyComponent } from './pages/bus-occupancy/bus-occupancy.component';
 import { LiveBusTrackingComponent } from './pages/live-bus-tracking/live-bus-tracking.component';
 import { StudentLoginComponent } from './pages/student-login/student-login.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ForgotPasswordComponent } from './pages/student-forgot-password/forgot-password.component';
+import { AdminProfileComponent } from './pages/adminprofile/adminprofile.component';
+import { AdminChangePasswordComponent } from './pages/admin-change-password/admin-change-password.component';
+import { AdminForgotPasswordComponent } from './pages/admin-forgot-password/admin-forgot-password.component';
 
 const routes: Routes = [
 
@@ -64,6 +67,15 @@ const routes: Routes = [
     path: 'forgot-password',
     component: ForgotPasswordComponent
   },
+  {
+    path: 'admin-change-password',
+    component: AdminChangePasswordComponent
+  },
+  {
+    path: 'admin-forgot-password',
+    component: AdminForgotPasswordComponent
+  },
+
   // Student Layout
   {
     path: '',
@@ -265,6 +277,11 @@ const routes: Routes = [
         component: LiveBusTrackingComponent,
         canActivate: [AuthGuard]
       },
+      {
+        path: 'profile',
+        component: AdminProfileComponent,
+        canActivate: [AuthGuard]
+      }
 
     ]
   }

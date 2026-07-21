@@ -12,6 +12,12 @@ export interface Admin {
 
   fullName?: string;
 
+  photoUrl?: string;
+
+  otp?: string;
+
+  otpExpiry?: string;
+
   createdAt?: string;
 
 }

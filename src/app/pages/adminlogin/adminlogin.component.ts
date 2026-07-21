@@ -40,8 +40,11 @@ export class AdminLoginComponent {
 
           sessionStorage.setItem('isLoggedIn', 'true');
           sessionStorage.setItem('role', 'ADMIN');
+          sessionStorage.setItem('adminId', response.adminId!.toString());
           sessionStorage.setItem('username', response.username);
-
+          sessionStorage.setItem('fullName', response.fullName ?? '');
+          sessionStorage.setItem('email', response.email ?? '');
+          
           this.toast.success('Admin Login Successful');
 
           this.router.navigate(['/dashboard']);

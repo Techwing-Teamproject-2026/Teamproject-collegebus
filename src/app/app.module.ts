@@ -9,7 +9,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AdminLoginComponent } from './pages/adminlogin/adminlogin.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DashboardComponent } from './pages/admindashboard/dashboard.component';
 import { StudentComponent } from './pages/student/student.component';
 import { DriverComponent } from './pages/driver/driver.component';
 import { BusComponent } from './pages/bus/bus.component';
@@ -18,7 +18,7 @@ import { StopsComponent } from './pages/stops/stops.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { ComplaintComponent } from './pages/complaint/complaint.component';
 import { NotificationComponent } from './pages/notification/notification.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { AdminProfileComponent } from './pages/adminprofile/adminprofile.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -57,7 +57,9 @@ import { StudentChangePasswordComponent } from './pages/student-change-password/
 import { BusOccupancyComponent } from './pages/bus-occupancy/bus-occupancy.component';
 import { LiveBusTrackingComponent } from './pages/live-bus-tracking/live-bus-tracking.component';
 import { StudentLoginComponent } from './pages/student-login/student-login.component';
-import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ForgotPasswordComponent } from './pages/student-forgot-password/forgot-password.component';
+import { AdminChangePasswordComponent } from './pages/admin-change-password/admin-change-password.component';
+import { AdminForgotPasswordComponent } from './pages/admin-forgot-password/admin-forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     AttendanceComponent,
     ComplaintComponent,
     NotificationComponent,
-    ProfileComponent,
+    AdminProfileComponent,
     SettingsComponent,
     AddStudentComponent,
     EditStudentComponent,
@@ -112,6 +114,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     LiveBusTrackingComponent,
     StudentLoginComponent,
     ForgotPasswordComponent,
+    AdminChangePasswordComponent,
+    AdminForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
