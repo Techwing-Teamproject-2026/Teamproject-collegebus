@@ -1,0 +1,83 @@
+<div class="container-fluid py-4 animate-fade-in">
+    <!-- Header Section -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div>
+            <h2 class="mb-1 fw-bold text-glow">🤖 AI Transit Assistant</h2>
+            <p class="text-muted m-0">Ask questions about your bus assignment, route delays, or tracking in real time.</p>
+        </div>
+        <div class="welcome-box mt-3 mt-md-0 d-flex align-items-center">
+            <span class="user-welcome-icon float-bus me-2">👋</span>
+            <span class="fw-bold text-white">Welcome back, {{studentName}}</span>
+        </div>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card chat-card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <div class="chat-status-indicator pulse-animation me-2"></div>
+                        <span class="fw-bold text-white">AI Assistant Chat</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-indigo px-3 py-1" (click)="clearChat()">
+                        <i class="bi bi-trash-fill me-1"></i> Clear Log
+                    </button>
+                </div>
+                
+                <div class="card-body d-flex flex-column p-0">
+                    <!-- Message Log Container -->
+                    <div class="chat-messages-container p-4 animate-fade-in" #scrollContainer>
+                        <div *ngFor="let msg of messages" class="d-flex mb-3" 
+                             [ngClass]="{'justify-content-end': msg.sender === 'user', 'justify-content-start': msg.sender === 'bot'}">
+                            
+                            <div class="message-bubble-wrapper max-w-75">
+                                <div class="message-sender-tag text-muted small mb-1 px-2" [ngClass]="{'text-end': msg.sender === 'user'}">
+                                    {{msg.sender === 'user' ? 'You' : 'Assistant'}} • {{msg.timestamp | date:'shortTime'}}
+                                </div>
+                                <div class="message-bubble p-3" [ngClass]="msg.sender === 'user' ? 'user-bubble' : 'bot-bubble'">
+                                    {{msg.text}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Loading Bubble -->
+                        <div *ngIf="loading" class="d-flex justify-content-start mb-3">
+                            <div class="message-bubble-wrapper max-w-75">
+                                <div class="message-sender-tag text-muted small mb-1 px-2">Assistant is typing...</div>
+                                <div class="message-bubble p-3 bot-bubble d-flex align-items-center">
+                                    <span class="spinner-grow spinner-grow-sm me-1 bg-teal" role="status"></span>
+                                    <span class="spinner-grow spinner-grow-sm me-1 bg-teal" role="status"></span>
+                                    <span class="spinner-grow spinner-grow-sm bg-teal" role="status"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Error Alert inside Chat -->
+                        <div *ngIf="errorMsg" class="alert alert-danger mx-2 my-3 d-flex align-items-center" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2 fs-5 text-danger"></i>
+                            <div class="text-white">{{errorMsg}}</div>
+                        </div>
+                    </div>
+
+                    <!-- Input Form Footer -->
+                    <div class="card-footer p-3">
+                        <form (ngSubmit)="sendMessage()" class="d-flex gap-2">
+                            <input type="text" name="chatInput" 
+                                   class="form-control chat-input" 
+                                   placeholder="Type your transit question here (e.g., 'Where is my bus?')..." 
+                                   [(ngModel)]="question" 
+                                   [disabled]="loading" 
+                                   autocomplete="off">
+                            <button type="submit" class="btn btn-indigo px-4" [disabled]="!question.trim() || loading">
+                                <i class="bi bi-send-fill me-1" *ngIf="!loading"></i>
+                                <span class="spinner-border spinner-border-sm me-1 text-white" *ngIf="loading"></span>
+                                Send
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
