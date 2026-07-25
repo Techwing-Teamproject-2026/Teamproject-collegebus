@@ -21,6 +21,10 @@ public class StudentBusAssignmentController {
 	@PostMapping("/save")
 	public StudentBusAssignment saveStudentBusAssignment(@RequestBody StudentBusAssignment studentBusAssignment) {
 
+		System.out.println("========== ASSIGNMENT RECEIVED ==========");
+		System.out.println(studentBusAssignment);
+		System.out.println("Route ID = " + studentBusAssignment.getRouteId());
+
 		return studentBusAssignmentService.saveStudentBusAssignment(studentBusAssignment);
 	}
 
