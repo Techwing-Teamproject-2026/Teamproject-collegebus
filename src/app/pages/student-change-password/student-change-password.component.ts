@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ChangePassword } from 'src/app/models/change-password';
 import { StudentService } from 'src/app/services/student.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-student-change-password',
@@ -13,16 +14,56 @@ export class StudentChangePasswordComponent {
 
   confirmPassword: string = '';
 
-  constructor(private studentService: StudentService) { }
+  // Password Visibility
 
-  changePassword() {
+  showCurrentPassword = false;
+
+  showNewPassword = false;
+
+  showConfirmPassword = false;
+
+  constructor(
+
+    private studentService: StudentService,
+
+    private toast: ToastService
+
+  ) { }
+
+  changePassword(): void {
 
     this.passwordData.studentId =
       Number(sessionStorage.getItem('studentId'));
 
-    if (this.passwordData.newPassword != this.confirmPassword) {
+    // Validation
 
-      alert("New Password and Confirm Password do not match");
+    if (!this.passwordData.currentPassword) {
+
+      this.toast.warning("Please enter your current password");
+
+      return;
+
+    }
+
+    if (!this.passwordData.newPassword) {
+
+      this.toast.warning("Please enter a new password");
+
+      return;
+
+    }
+
+    if (!this.confirmPassword) {
+
+      this.toast.warning("Please confirm your new password");
+
+      return;
+
+    }
+
+    if (this.passwordData.newPassword !== this.confirmPassword) {
+
+      this.toast.error("New Password and Confirm Password do not match");
 
       return;
 
@@ -32,17 +73,25 @@ export class StudentChangePasswordComponent {
 
       next: (res) => {
 
-        alert(res);
+        this.toast.success(res);
+
+        // Clear Form
 
         this.passwordData = {};
 
         this.confirmPassword = '';
 
+        this.showCurrentPassword = false;
+
+        this.showNewPassword = false;
+
+        this.showConfirmPassword = false;
+
       },
 
       error: (err) => {
 
-        alert(err.error);
+        this.toast.error(err.error);
 
       }
 

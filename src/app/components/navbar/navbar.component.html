@@ -27,10 +27,68 @@
     <!-- Center: Search Box -->
     <div class="nav-center">
 
-        <div class="search-box">
-            <i class="bi bi-search"></i>
-            <input type="text" [(ngModel)]="searchQuery" (keyup.enter)="performSearch()"
-                placeholder="Search students, drivers, buses, routes..." />
+        <div class="search-container">
+
+            <div class="search-input">
+
+                <i class="bi bi-search search-icon"></i>
+
+                <input type="text" [(ngModel)]="searchQuery" (input)="onSearchChange()" (keyup.enter)="performSearch()"
+                    placeholder="Search students, buses, routes, drivers..." />
+
+                <button *ngIf="searchQuery" class="clear-btn"
+                    (click)="searchQuery='';searchResults=[];showSearchResults=false">
+
+                    <i class="bi bi-x-lg"></i>
+
+                </button>
+
+            </div>
+
+            <div class="search-dropdown" *ngIf="showSearchResults">
+
+                <div class="search-card" *ngFor="let result of searchResults" (click)="selectResult(result)">
+
+                    <div class="search-avatar">
+
+                        <i [class]="result.icon"></i>
+
+                    </div>
+
+                    <div class="search-info">
+
+                        <div class="search-name">
+
+                            {{result.title}}
+
+                        </div>
+
+                        <div class="search-desc">
+
+                            {{result.subtitle}}
+
+                        </div>
+
+                    </div>
+
+                    <span class="search-badge">
+
+                        {{result.type}}
+
+                    </span>
+
+                </div>
+
+                <div class="empty-search" *ngIf="searchResults.length==0">
+
+                    <i class="bi bi-search"></i>
+
+                    No matching records found
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
@@ -40,7 +98,8 @@
 
         <!-- Main Navigation Links -->
         <div class="nav-links">
-            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">
                 <i class="bi bi-grid-1x2-fill"></i>
                 <span>Dashboard</span>
             </a>

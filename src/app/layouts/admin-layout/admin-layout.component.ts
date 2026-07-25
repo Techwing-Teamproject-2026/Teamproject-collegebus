@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from 'src/app/services/layout.service';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -15,9 +16,12 @@ export class AdminLayoutComponent implements OnInit {
 
   isSidebarCollapsed = false;
 
+  isDarkTheme = false;
+
   constructor(
     private router: Router,
-    public layoutService: LayoutService
+    public layoutService: LayoutService,
+    private settingsService: SettingsService
   ) {
 
     this.username = sessionStorage.getItem('username') || '';
@@ -39,6 +43,9 @@ export class AdminLayoutComponent implements OnInit {
   ngOnInit(): void {
     this.layoutService.sidebarCollapsed$.subscribe(collapsed => {
       this.isSidebarCollapsed = collapsed;
+    });
+    this.settingsService.theme$.subscribe(theme => {
+      this.isDarkTheme = theme === 'dark';
     });
   }
 

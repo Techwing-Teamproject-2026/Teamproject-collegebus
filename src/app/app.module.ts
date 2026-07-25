@@ -19,7 +19,7 @@ import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { ComplaintComponent } from './pages/complaint/complaint.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { AdminProfileComponent } from './pages/adminprofile/adminprofile.component';
-import { SettingsComponent } from './pages/settings/settings.component';
+import { SettingsComponent } from './pages/adminsettings/settings.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AddStudentComponent } from './pages/add-student/add-student.component';
@@ -61,6 +61,11 @@ import { ForgotPasswordComponent } from './pages/student-forgot-password/forgot-
 import { AdminChangePasswordComponent } from './pages/admin-change-password/admin-change-password.component';
 import { AdminForgotPasswordComponent } from './pages/admin-forgot-password/admin-forgot-password.component';
 import { StatCardComponent } from './shared/components/stat-card/stat-card.component';
+import { CollegeLogoComponent } from './pages/college-logo/college-logo.component';
+import { ThemeComponent } from './pages/admintheme/theme.component';
+import { DatabaseBackupComponent } from './pages/database-backup/database-backup.component';
+import { StudentSettingsComponent } from './pages/student-settings/student-settings.component';
+import { StudentThemeComponent } from './pages/student-theme/student-theme.component';
 
 @NgModule({
   declarations: [
@@ -118,6 +123,11 @@ import { StatCardComponent } from './shared/components/stat-card/stat-card.compo
     AdminChangePasswordComponent,
     AdminForgotPasswordComponent,
     StatCardComponent,
+    CollegeLogoComponent,
+    ThemeComponent,
+    DatabaseBackupComponent,
+    StudentSettingsComponent,
+    StudentThemeComponent,
   ],
   imports: [
     BrowserModule,

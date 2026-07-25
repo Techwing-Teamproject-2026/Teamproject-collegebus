@@ -67,7 +67,12 @@
                 <td>{{student.email}}</td>
                 <td>{{student.department}}</td>
                 <td>{{student.year}}</td>
-                <td>{{student.busPassNumber}}</td>
+                <td>
+                    <span class="badge bg-primary" *ngIf="student.busPassNumber">
+                        {{student.busPassNumber}}
+                    </span>
+                    <span class="text-muted" *ngIf="!student.busPassNumber">-</span>
+                </td>
 
                 <td>
 

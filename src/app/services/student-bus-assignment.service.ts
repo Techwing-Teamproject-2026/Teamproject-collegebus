@@ -34,8 +34,12 @@ export class StudentBusAssignmentService {
     }
 
     // Delete Assignment
-    deleteAssignment(id: number): Observable<any> {
-        return this.http.delete(`${this.baseUrl}/delete/${id}`);
+    deleteAssignment(id: number): Observable<string> {
+
+        return this.http.delete(`${this.baseUrl}/delete/${id}`, {
+            responseType: 'text'
+        });
+
     }
     // Get Assignment By Student Id
     getAssignmentByStudentId(studentId: number): Observable<StudentBusAssignment> {

@@ -48,6 +48,13 @@ import { ForgotPasswordComponent } from './pages/student-forgot-password/forgot-
 import { AdminProfileComponent } from './pages/adminprofile/adminprofile.component';
 import { AdminChangePasswordComponent } from './pages/admin-change-password/admin-change-password.component';
 import { AdminForgotPasswordComponent } from './pages/admin-forgot-password/admin-forgot-password.component';
+import { SettingsComponent } from './pages/adminsettings/settings.component';
+import { CollegeLogoComponent } from './pages/college-logo/college-logo.component';
+import { ThemeComponent } from './pages/admintheme/theme.component';
+import { DatabaseBackupComponent } from './pages/database-backup/database-backup.component';
+import { StudentSettingsComponent } from './pages/student-settings/student-settings.component';
+import { StudentThemeComponent } from './pages/student-theme/student-theme.component';
+
 
 const routes: Routes = [
 
@@ -114,6 +121,14 @@ const routes: Routes = [
       {
         path: 'student-change-password',
         component: StudentChangePasswordComponent
+      },
+      {
+        path: 'student-settings',
+        component: StudentSettingsComponent
+      },
+      {
+        path: 'student-theme',
+        component: StudentThemeComponent
       }
     ]
   },
@@ -281,8 +296,27 @@ const routes: Routes = [
         path: 'profile',
         component: AdminProfileComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'college-logo',
+        component: CollegeLogoComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'theme',
+        component: ThemeComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'database-backup',
+        component: DatabaseBackupComponent,
+        canActivate: [AuthGuard]
       }
-
     ]
   }
 

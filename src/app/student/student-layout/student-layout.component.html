@@ -1,17 +1,28 @@
 <div class="app-layout student-portal">
 
-    <!-- Navbar -->
+    <!-- ===========================
+         TOP NAVBAR
+    ============================ -->
+
     <header class="top-navbar">
+
         <app-student-navbar></app-student-navbar>
+
     </header>
 
-    <!-- Main Layout -->
+    <!-- ===========================
+         MAIN LAYOUT
+    ============================ -->
+
     <div class="main-layout">
 
-        <!-- Sidebar Backdrop Overlay -->
-        <div class="sidebar-backdrop" [class.visible]="!isSidebarCollapsed" (click)="toggleSidebar()"></div>
+        <!-- Mobile Overlay -->
+
+        <div class="sidebar-backdrop" [class.visible]="!isSidebarCollapsed" (click)="toggleSidebar()">
+        </div>
 
         <!-- Sidebar -->
+
         <aside class="left-sidebar" [class.collapsed]="isSidebarCollapsed">
 
             <app-student-sidebar></app-student-sidebar>
@@ -19,7 +30,10 @@
         </aside>
 
         <!-- Content -->
+
         <main class="content-area">
+
+            <!-- Loader -->
 
             <div class="page-loader" *ngIf="loading">
 
@@ -29,9 +43,19 @@
 
             </div>
 
+            <!-- Actual Page -->
+
             <div class="page-content" *ngIf="!loading">
 
-                <router-outlet></router-outlet>
+                <!-- Only this area scrolls -->
+
+                <section class="page-body">
+
+                    <router-outlet></router-outlet>
+
+                </section>
+
+                <!-- Footer -->
 
                 <app-footer></app-footer>
 

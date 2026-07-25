@@ -1,11 +1,12 @@
-<div class="container mt-4">
+<div class="container mt-3">
 
     <div class="card shadow">
 
         <div class="card-header bg-primary text-white">
 
             <h3 class="mb-0">
-                👤 Admin Profile
+                <i class="bi bi-person-fill me-2"></i>
+                Admin Profile
             </h3>
 
         </div>
@@ -14,32 +15,37 @@
 
             <div class="row">
 
-                <!-- Profile Photo -->
+                <!-- =========================
+                     LEFT SIDE
+                ========================== -->
 
                 <div class="col-md-3 text-center">
 
-                   <img *ngIf="admin?.photoUrl" [src]="'http://localhost:8085/uploads/' + admin.photoUrl"
-                        class="img-fluid rounded-circle border shadow" width="180" height="180">
+                    <img *ngIf="admin?.photoUrl" [src]="'http://localhost:8085/uploads/' + admin.photoUrl"
+                        class="img-fluid rounded-circle border shadow">
 
                     <img *ngIf="!admin?.photoUrl" src="assets/images/user.png"
-                        class="img-fluid rounded-circle border shadow" width="180" height="180">
+                        class="img-fluid rounded-circle border shadow">
 
-                    <br><br>
+                    <div class="mt-3">
 
-                    <input type="file" class="form-control" (change)="selectFile($event)">
+                        <input type="file" class="form-control" (change)="selectFile($event)">
 
-                    <br>
+                    </div>
 
-                    <button class="btn btn-primary w-100" (click)="uploadPhoto()">
+                    <button class="btn btn-primary w-100 mt-3" (click)="uploadPhoto()">
 
                         <i class="bi bi-upload"></i>
+
                         Upload Photo
 
                     </button>
 
                 </div>
 
-                <!-- Profile Details -->
+                <!-- =========================
+                     RIGHT SIDE
+                ========================== -->
 
                 <div class="col-md-9">
 
@@ -83,11 +89,12 @@
 
                     </div>
 
-                    <div class="mt-4">
+                    <div class="button-group">
 
-                        <button class="btn btn-success me-2" (click)="updateProfile()">
+                        <button class="btn btn-success" (click)="updateProfile()">
 
                             <i class="bi bi-check-circle"></i>
+
                             Update Profile
 
                         </button>
@@ -95,6 +102,7 @@
                         <button class="btn btn-warning" routerLink="/admin-change-password">
 
                             <i class="bi bi-lock-fill"></i>
+
                             Change Password
 
                         </button>
@@ -108,3 +116,5 @@
         </div>
 
     </div>
+
+</div>

@@ -129,17 +129,25 @@ export class AddStudentBusAssignmentComponent implements OnInit {
 
   onBusChange(): void {
 
-    const busId = this.assignmentForm.get('busId')?.value;
+    const busId = Number(this.assignmentForm.get('busId')?.value);
 
-    const selectedBus = this.buses.find(bus => bus.busId == busId);
+    const selectedBus = this.buses.find(bus => bus.busId === busId);
 
-    if (selectedBus) {
+    console.log('Selected Bus:', selectedBus);
+
+    if (selectedBus && selectedBus.routeId != null) {
 
       this.assignmentForm.patchValue({
-
         routeId: selectedBus.routeId
-
       });
+
+    } else {
+
+      this.assignmentForm.patchValue({
+        routeId: ''
+      });
+
+      this.alert.warning('Selected bus is not assigned to any route.');
 
     }
 

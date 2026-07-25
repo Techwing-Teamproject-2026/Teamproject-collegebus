@@ -2,6 +2,9 @@ import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { LayoutService } from 'src/app/services/layout.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { GlobalSearchService, SearchResult } from 'src/app/services/adminglobal-search.service';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 interface Notification {
 
@@ -24,6 +27,12 @@ export class NavbarComponent {
   username = '';
 
   searchQuery = '';
+
+  searchResults: SearchResult[] = [];
+
+  showSearchResults = false;
+
+  private searchSubject = new Subject<string>();
 
   showNotifications = false;
 
@@ -65,13 +74,37 @@ export class NavbarComponent {
   constructor(
     private router: Router,
     public layoutService: LayoutService,
-    private alert: AlertService
+    private alert: AlertService,
+    private globalSearch: GlobalSearchService
   ) {
 
     this.username =
       sessionStorage.getItem('fullName') ||
       sessionStorage.getItem('username') ||
       'Administrator';
+    this.searchSubject
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged()
+      )
+      .subscribe(value => {
+
+        if (!value.trim()) {
+
+          this.searchResults = [];
+          this.showSearchResults = false;
+          return;
+
+        }
+
+        this.globalSearch.search(value).subscribe(results => {
+
+          this.searchResults = results;
+          this.showSearchResults = true;
+
+        });
+
+      });
 
   }
 
@@ -141,16 +174,29 @@ export class NavbarComponent {
     this.activeReplyId = null;
 
   }
-
   performSearch(): void {
 
-    if (!this.searchQuery.trim()) {
+    if (this.searchResults.length > 0) {
 
-      return;
+      this.selectResult(this.searchResults[0]);
 
     }
 
-    console.log(this.searchQuery);
+  }
+
+  onSearchChange(): void {
+
+    this.searchSubject.next(this.searchQuery);
+
+  }
+
+  selectResult(result: SearchResult): void {
+
+    this.searchQuery = '';
+
+    this.showSearchResults = false;
+
+    this.router.navigate([result.route]);
 
   }
 
@@ -179,6 +225,10 @@ export class NavbarComponent {
   clickedOutside(): void {
 
     this.closeNotifications();
+
+    setTimeout(() => {
+      this.showSearchResults = false;
+    }, 150);
 
   }
 

@@ -25,22 +25,69 @@
     </div>
 
     <!-- Center: Search Box -->
+
     <div class="nav-center">
 
         <div class="search-box">
+
             <i class="bi bi-search"></i>
-            <input type="text" [(ngModel)]="searchQuery" (keyup.enter)="performSearch()"
-                placeholder="Search buses, routes or schedule..." />
+
+            <!-- Hidden fields to prevent Chrome autofill -->
+
+            <input type="text" tabindex="-1" autocomplete="username" style="display:none">
+
+            <input type="password" tabindex="-1" autocomplete="current-password" style="display:none">
+
+            <!-- Actual Search -->
+
+            <input type="search" class="search-input" placeholder="Search pages..." [(ngModel)]="searchQuery"
+                (input)="onSearch()" (keydown)="handleKeyDown($event)" autocomplete="off" spellcheck="false"
+                autocorrect="off" autocapitalize="off">
+            <!-- Search Results -->
+
+            <div class="search-dropdown" *ngIf="searchQuery && filteredPages.length">
+
+                <div class="search-item" *ngFor="let page of filteredPages; let i=index"
+                    [class.active]="i===selectedIndex" (click)="goToPage(page.route)">
+
+                    <i [class]="page.icon"></i>
+
+                    <div class="search-text">
+
+                        <strong>{{page.title}}</strong>
+
+                        <small>{{page.description}}</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- No Results -->
+
+            <div class="search-dropdown" *ngIf="searchQuery && filteredPages.length==0">
+
+                <div class="no-result">
+
+                    <i class="bi bi-search"></i>
+
+                    No matching pages found
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
-
     <!-- Right: Navigation Links, Notification, Welcome User, Logout -->
     <div class="nav-right">
 
         <!-- Main Navigation Links -->
         <div class="nav-links">
-            <a class="nav-link" routerLink="/student-dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link" routerLink="/student-dashboard" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">
                 <i class="bi bi-grid-1x2-fill"></i>
                 <span>Dashboard</span>
             </a>
@@ -92,16 +139,23 @@
 
                         <!-- Student Quick Acknowledge/Reply Button -->
                         <div class="notif-actions mt-2">
-                            <button class="btn btn-sm btn-link p-0" (click)="toggleReply(notif.notificationId)" style="color: #0d9488; text-decoration: none; font-weight: 600; font-size: 11px;">
+                            <button class="btn btn-sm btn-link p-0" (click)="toggleReply(notif.notificationId)"
+                                style="color: #0d9488; text-decoration: none; font-weight: 600; font-size: 11px;">
                                 <i class="bi bi-envelope-open-fill me-1"></i> Send Note / Reply
                             </button>
                         </div>
 
                         <!-- Expandable Reply Box -->
                         <div class="reply-box mt-2" *ngIf="activeReplyId === notif.notificationId">
-                            <div class="input-group input-group-sm" style="border: 1px solid #cbd5e1; border-radius: 8px; background: white;">
-                                <input type="text" class="form-control form-control-sm" placeholder="Send note to driver/admin..." [(ngModel)]="replyText" (keyup.enter)="submitReply(notif.notificationId)" style="border: none !important; height: 32px !important; box-shadow: none !important; font-size: 12px;">
-                                <button class="btn btn-primary btn-sm" type="button" (click)="submitReply(notif.notificationId)" style="padding: 4px 12px !important; font-size: 12px !important; border-radius: 0 8px 8px 0 !important;">Send</button>
+                            <div class="input-group input-group-sm"
+                                style="border: 1px solid #cbd5e1; border-radius: 8px; background: white;">
+                                <input type="text" class="form-control form-control-sm"
+                                    placeholder="Send note to driver/admin..." [(ngModel)]="replyText"
+                                    (keyup.enter)="submitReply(notif.notificationId)"
+                                    style="border: none !important; height: 32px !important; box-shadow: none !important; font-size: 12px;">
+                                <button class="btn btn-primary btn-sm" type="button"
+                                    (click)="submitReply(notif.notificationId)"
+                                    style="padding: 4px 12px !important; font-size: 12px !important; border-radius: 0 8px 8px 0 !important;">Send</button>
                             </div>
                         </div>
 

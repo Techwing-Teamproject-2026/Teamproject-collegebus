@@ -10,21 +10,32 @@ export class AdminChangePasswordComponent {
 
   adminId = Number(sessionStorage.getItem('adminId'));
 
-  currentPassword = '';
-  newPassword = '';
-  confirmPassword = '';
+  currentPassword: string = '';
+  newPassword: string = '';
+  confirmPassword: string = '';
+
+  // Password Visibility
+  showCurrentPassword = false;
+  showNewPassword = false;
+  showConfirmPassword = false;
 
   constructor(private adminService: AdminService) { }
 
-  changePassword() {
+  changePassword(): void {
 
-    if (!this.currentPassword || !this.newPassword || !this.confirmPassword) {
-      alert('Please fill all fields');
+    // Validate Empty Fields
+    if (
+      !this.currentPassword.trim() ||
+      !this.newPassword.trim() ||
+      !this.confirmPassword.trim()
+    ) {
+      alert('Please fill all fields.');
       return;
     }
 
+    // Validate Password Match
     if (this.newPassword !== this.confirmPassword) {
-      alert('New Password and Confirm Password do not match');
+      alert('New Password and Confirm Password do not match.');
       return;
     }
 
@@ -35,19 +46,25 @@ export class AdminChangePasswordComponent {
 
     this.adminService.changePassword(this.adminId, body).subscribe({
 
-      next: (res) => {
+      next: (response: any) => {
 
-        alert(res);
+        alert(response);
 
+        // Clear Form
         this.currentPassword = '';
         this.newPassword = '';
         this.confirmPassword = '';
 
+        // Hide Passwords Again
+        this.showCurrentPassword = false;
+        this.showNewPassword = false;
+        this.showConfirmPassword = false;
+
       },
 
-      error: (err) => {
+      error: (error) => {
 
-        alert(err.error);
+        alert(error.error || 'Password change failed.');
 
       }
 

@@ -57,7 +57,11 @@
 
                 <td>{{driver.license}}</td>
 
-                <td>{{driver.status}}</td>
+                <td>
+                    <span class="badge" [ngClass]="driver.status === 'Active' ? 'bg-success' : 'bg-danger'">
+                        {{driver.status}}
+                    </span>
+                </td>
 
                 <td>
 

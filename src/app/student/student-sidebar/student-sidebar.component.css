@@ -3,14 +3,23 @@
    ========================================================= */
 
 .sidebar {
-  width: 280px;
+
+  width: 100%;
+
   height: 100%;
-  background: #FFFFFF;
-  color: #1E293B;
+
+  min-height: 100%;
+
   display: flex;
+
   flex-direction: column;
+
+  background: #ffffff;
+
+  color: #1E293B;
+
   overflow: hidden;
-  border-right: none;
+
 }
 
 /* =========================================================
@@ -37,7 +46,8 @@
 }
 
 .sidebar-brand i {
-  color: #0d9488; /* Teal brand icon color */
+  color: #0d9488;
+  /* Teal brand icon color */
   font-size: 16px;
 }
 
@@ -65,9 +75,17 @@
    ========================================================= */
 
 .sidebar-menu {
+
   flex: 1;
+
+  min-height: 0;
+
   overflow-y: auto;
+
+  overflow-x: hidden;
+
   padding: 12px 8px;
+
 }
 
 .sidebar-menu::-webkit-scrollbar {
@@ -143,12 +161,15 @@
    ========================================================= */
 
 .menu-link.active {
-  color: #0d9488; /* Teal active link */
-  background: #F0FDFA; /* Light Teal background active */
+  color: #0d9488;
+  /* Teal active link */
+  background: #F0FDFA;
+  /* Light Teal background active */
 }
 
 .menu-link.active .menu-icon {
-  background: #0d9488; /* Teal active icon background */
+  background: #0d9488;
+  /* Teal active icon background */
   color: #FFFFFF;
 }
 
@@ -157,9 +178,17 @@
    ========================================================= */
 
 .sidebar-footer {
-  border-top: 1px solid #F1F5F9;
+
+  margin-top: auto;
+
+  flex-shrink: 0;
+
   padding: 12px 16px;
+
+  border-top: 1px solid #E2E8F0;
+
   background: #F8FAFC;
+
 }
 
 .version {

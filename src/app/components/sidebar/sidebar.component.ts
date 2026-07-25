@@ -94,27 +94,10 @@ export class SidebarComponent implements OnInit {
     },
 
     // ==========================
-    // REPORTS
-    // ==========================
-
-    {
-      section: 'REPORTS',
-      title: 'Analytics',
-      icon: 'bi bi-graph-up',
-      route: '/analytics'
-    },
-
-    // ==========================
     // ACCOUNT
     // ==========================
-
     {
       section: 'ACCOUNT',
-      title: 'Profile',
-      icon: 'bi bi-person-fill',
-      route: '/profile'
-    },
-    {
       title: 'Settings',
       icon: 'bi bi-gear-fill',
       route: '/settings'

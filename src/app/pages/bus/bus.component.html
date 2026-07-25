@@ -62,7 +62,11 @@
 
                 <td>{{bus.capacity}}</td>
 
-                <td>{{bus.status}}</td>
+                <td>
+                    <span class="badge" [ngClass]="bus.status === 'Active' ? 'bg-success' : (bus.status === 'Maintenance' ? 'bg-warning' : 'bg-danger')">
+                        {{bus.status}}
+                    </span>
+                </td>
 
                 <td>{{bus.driverId}}</td>
 

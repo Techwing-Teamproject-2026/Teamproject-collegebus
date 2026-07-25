@@ -69,14 +69,9 @@ export class StudentSidebarComponent implements OnInit {
     // ==========================
     {
       section: 'ACCOUNT',
-      title: 'My Profile',
-      icon: 'bi bi-person-circle',
-      route: '/student-profile'
-    },
-    {
-      title: 'Change Password',
-      icon: 'bi bi-key-fill',
-      route: '/student-change-password'
+      title: 'Settings',
+      icon: 'bi bi-gear-fill',
+      route: '/student-settings'
     }
 
   ];
