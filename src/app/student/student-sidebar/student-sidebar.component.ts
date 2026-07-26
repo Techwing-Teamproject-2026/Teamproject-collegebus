@@ -44,6 +44,11 @@ export class StudentSidebarComponent implements OnInit {
       route: '/student-route'
     },
     {
+      title: 'Live Bus Tracking',
+      icon: 'bi bi-geo-alt-fill',
+      route: '/student-live-bus-tracking'
+    },
+    {
       title: 'Attendance',
       icon: 'bi bi-calendar-check-fill',
       route: '/student-attendance'

@@ -41,8 +41,8 @@ import { StudentNotificationComponent } from './pages/student-notification/stude
 import { StudentComplaintComponent } from './pages/student-complaint/student-complaint.component';
 import { StudentChangePasswordComponent } from './pages/student-change-password/student-change-password.component';
 import { StudentAuthGuard } from './guards/student-auth.guard';
-import { BusOccupancyComponent } from './pages/bus-occupancy/bus-occupancy.component';
-import { LiveBusTrackingComponent } from './pages/live-bus-tracking/live-bus-tracking.component';
+import { BusOccupancyComponent } from './pages/admin-bus-occupancy/bus-occupancy.component';
+import { LiveBusTrackingComponent } from './pages/student-live-bus-tracking/live-bus-tracking.component';
 import { StudentLoginComponent } from './pages/student-login/student-login.component';
 import { ForgotPasswordComponent } from './pages/student-forgot-password/forgot-password.component';
 import { AdminProfileComponent } from './pages/adminprofile/adminprofile.component';
@@ -129,7 +129,11 @@ const routes: Routes = [
       {
         path: 'student-theme',
         component: StudentThemeComponent
-      }
+      },
+      {
+        path: 'student-live-bus-tracking',
+        component: LiveBusTrackingComponent
+      },
     ]
   },
 

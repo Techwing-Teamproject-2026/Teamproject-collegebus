@@ -14,8 +14,8 @@
                 <span class="input-group-text bg-white border-end-0">
                     <i class="bi bi-search text-muted"></i>
                 </span>
-                <input type="text" class="form-control border-start-0 ps-0" placeholder="Search by Title or Status" [(ngModel)]="searchText"
-                    (keyup)="searchComplaints()">
+                <input type="text" class="form-control border-start-0 ps-0" placeholder="Search by Title or Status"
+                    [(ngModel)]="searchText" (keyup)="searchComplaints()">
             </div>
 
         </div>
@@ -83,20 +83,24 @@
 
                 <td>{{complaint.createdAt | date:'dd-MM-yyyy HH:mm'}}</td>
 
-                <td>
+                <td class="action-column">
 
-                    <button class="btn btn-primary btn-sm me-2"
-                        [routerLink]="['/edit-complaint', complaint.complaintId]">
+                    <div class="action-buttons">
 
-                        Edit
+                        <button class="btn btn-primary btn-sm"
+                            [routerLink]="['/edit-complaint', complaint.complaintId]">
 
-                    </button>
+                            Edit
 
-                    <button class="btn btn-danger btn-sm" (click)="deleteComplaint(complaint.complaintId!)">
+                        </button>
 
-                        Delete
+                        <button class="btn btn-danger btn-sm" (click)="deleteComplaint(complaint.complaintId!)">
 
-                    </button>
+                            Delete
+
+                        </button>
+
+                    </div>
 
                 </td>
 

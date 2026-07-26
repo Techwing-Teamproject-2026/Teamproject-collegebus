@@ -54,8 +54,8 @@ import { StudentAttendanceComponent } from './pages/student-attendance/student-a
 import { StudentNotificationComponent } from './pages/student-notification/student-notification.component';
 import { StudentComplaintComponent } from './pages/student-complaint/student-complaint.component';
 import { StudentChangePasswordComponent } from './pages/student-change-password/student-change-password.component';
-import { BusOccupancyComponent } from './pages/bus-occupancy/bus-occupancy.component';
-import { LiveBusTrackingComponent } from './pages/live-bus-tracking/live-bus-tracking.component';
+import { BusOccupancyComponent } from './pages/admin-bus-occupancy/bus-occupancy.component';
+import { LiveBusTrackingComponent } from './pages/student-live-bus-tracking/live-bus-tracking.component';
 import { StudentLoginComponent } from './pages/student-login/student-login.component';
 import { ForgotPasswordComponent } from './pages/student-forgot-password/forgot-password.component';
 import { AdminChangePasswordComponent } from './pages/admin-change-password/admin-change-password.component';

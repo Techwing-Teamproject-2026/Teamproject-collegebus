@@ -13,11 +13,8 @@
                 <span class="input-group-text bg-white border-end-0">
                     <i class="bi bi-search text-muted"></i>
                 </span>
-                <input
-                    type="text"
-                    class="form-control border-start-0 ps-0"
-                    placeholder="Search by Route Name, Code, Start or End"
-                    [(ngModel)]="searchText"
+                <input type="text" class="form-control border-start-0 ps-0"
+                    placeholder="Search by Route Name, Code, Start or End" [(ngModel)]="searchText"
                     (keyup)="filterRoutes()">
             </div>
         </div>
@@ -28,29 +25,29 @@
         </div>
     </div>
 
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-striped">
 
         <thead class="table-dark">
 
             <tr>
 
-                <th>ID</th>
+                <th style="width:60px;">ID</th>
 
-                <th>Route Name</th>
+                <th style="width:260px;">Route Name</th>
 
-                <th>Route Code</th>
+                <th style="width:140px;">Route Code</th>
 
-                <th>Start Point</th>
+                <th style="width:260px;">Start Point</th>
 
-                <th>End Point</th>
+                <th style="width:260px;">End Point</th>
 
-                <th>Distance (KM)</th>
+                <th style="width:120px;">Distance</th>
 
-                <th>Expected Time (Min)</th>
+                <th style="width:170px;">Expected Time</th>
 
-                <th>Status</th>
+                <th style="width:140px;">Status</th>
 
-                <th>Actions</th>
+                <th style="width:180px;">Actions</th>
 
             </tr>
 
@@ -60,19 +57,47 @@
 
             <tr *ngFor="let route of routes">
 
-                <td>{{route.routeId}}</td>
+                <td>
 
-                <td>{{route.routeName}}</td>
+                    {{route.routeId}}
 
-                <td>{{route.routeCode}}</td>
+                </td>
 
-                <td>{{route.startPoint}}</td>
+                <td>
 
-                <td>{{route.endPoint}}</td>
+                    {{route.routeName}}
 
-                <td>{{route.distance}}</td>
+                </td>
 
-                <td>{{route.expectedTime}}</td>
+                <td>
+
+                    {{route.routeCode}}
+
+                </td>
+
+                <td>
+
+                    {{route.startPoint}}
+
+                </td>
+
+                <td>
+
+                    {{route.endPoint}}
+
+                </td>
+
+                <td>
+
+                    {{route.distance}} KM
+
+                </td>
+
+                <td>
+
+                    {{route.expectedTime}} Min
+
+                </td>
 
                 <td>
 
@@ -90,26 +115,27 @@
 
                 </td>
 
-                <td>
+                <td class="action-column">
 
-                    <button class="btn btn-primary btn-sm me-2" (click)="editRoute(route.routeId!)">
+                    <div class="action-buttons">
 
-                        Edit
+                        <button class="btn btn-primary btn-sm" (click)="editRoute(route.routeId!)">
 
-                    </button>
+                            Edit
 
-                    <button class="btn btn-danger btn-sm" (click)="deleteRoute(route.routeId!)">
+                        </button>
 
-                        Delete
+                        <button class="btn btn-danger btn-sm" (click)="deleteRoute(route.routeId!)">
 
-                    </button>
+                            Delete
+
+                        </button>
+
+                    </div>
 
                 </td>
-
             </tr>
 
         </tbody>
 
     </table>
-
-</div>

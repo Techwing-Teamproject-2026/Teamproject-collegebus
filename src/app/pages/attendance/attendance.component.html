@@ -13,11 +13,8 @@
                 <span class="input-group-text bg-white border-end-0">
                     <i class="bi bi-search text-muted"></i>
                 </span>
-                <input
-                    type="text"
-                    class="form-control border-start-0 ps-0"
-                    placeholder="Search by Student ID, Bus ID, Scan Type"
-                    [(ngModel)]="searchText"
+                <input type="text" class="form-control border-start-0 ps-0"
+                    placeholder="Search by Student ID, Bus ID, Scan Type" [(ngModel)]="searchText"
                     (keyup)="filterAttendances()">
             </div>
         </div>
@@ -66,17 +63,13 @@
 
                 <td>
 
-                    <span
-                        class="badge bg-success"
-                        *ngIf="attendance.scanType == 'BOARDING'">
+                    <span class="badge bg-success" *ngIf="attendance.scanType == 'BOARDING'">
 
                         BOARDING
 
                     </span>
 
-                    <span
-                        class="badge bg-warning text-dark"
-                        *ngIf="attendance.scanType == 'ALIGHTING'">
+                    <span class="badge bg-warning text-dark" *ngIf="attendance.scanType == 'ALIGHTING'">
 
                         ALIGHTING
 
@@ -86,23 +79,23 @@
 
                 <td>{{attendance.createdAt}}</td>
 
-                <td>
+                <td class="action-column">
 
-                    <button
-                        class="btn btn-primary btn-sm me-2"
-                        (click)="editAttendance(attendance.attendanceId!)">
+                    <div class="action-buttons">
 
-                        Edit
+                        <button class="btn btn-primary btn-sm" (click)="editAttendance(attendance.attendanceId!)">
 
-                    </button>
+                            Edit
 
-                    <button
-                        class="btn btn-danger btn-sm"
-                        (click)="deleteAttendance(attendance.attendanceId!)">
+                        </button>
 
-                        Delete
+                        <button class="btn btn-danger btn-sm" (click)="deleteAttendance(attendance.attendanceId!)">
 
-                    </button>
+                            Delete
+
+                        </button>
+
+                    </div>
 
                 </td>
 

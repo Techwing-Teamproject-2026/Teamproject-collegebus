@@ -33,4 +33,17 @@ export class BusOccupancyService {
         );
     }
 
+    // Generate All Bus Occupancies
+    generateAllOccupancy(): Observable<any> {
+
+        return this.http.post(
+            `${this.apiUrl}/generateall`,
+            {},
+            {
+                responseType: 'text'
+            }
+        );
+
+    }
+
 }

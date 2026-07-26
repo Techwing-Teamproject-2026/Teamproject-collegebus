@@ -1,23 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Bus } from 'src/app/models/bus';
 import { BusOccupancy } from 'src/app/models/bus-occupancy';
 
 import { BusService } from 'src/app/services/bus.service';
 import { BusOccupancyService } from 'src/app/services/bus-occupancy.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-bus-occupancy',
   templateUrl: './bus-occupancy.component.html',
   styleUrls: ['./bus-occupancy.component.css']
 })
-export class BusOccupancyComponent implements OnInit {
+export class BusOccupancyComponent implements OnInit, OnDestroy {
 
   occupancies: BusOccupancy[] = [];
   buses: Bus[] = [];
-
   selectedBusId: number = 0;
-
   totalBuses = 0;
   totalOccupied = 0;
   totalAvailable = 0;
@@ -25,15 +24,37 @@ export class BusOccupancyComponent implements OnInit {
   searchText = '';
   currentPage = 1;
   itemsPerPage = 5;
+  refreshInterval: any;
+  lastUpdated = '';
 
   constructor(
     private busService: BusService,
-    private busOccupancyService: BusOccupancyService
+    private busOccupancyService: BusOccupancyService,
+    private toast: ToastService
   ) { }
 
   ngOnInit(): void {
+
     this.loadBuses();
+
     this.loadOccupancy();
+
+    this.refreshInterval = setInterval(() => {
+
+      this.loadOccupancy();
+
+    }, 15000);
+
+  }
+
+  ngOnDestroy(): void {
+
+    if (this.refreshInterval) {
+
+      clearInterval(this.refreshInterval);
+
+    }
+
   }
 
   loadBuses(): void {
@@ -65,6 +86,8 @@ export class BusOccupancyComponent implements OnInit {
         this.occupancies = data;
 
         this.calculateSummary();
+
+        this.lastUpdated = new Date().toLocaleTimeString();
 
       },
 
@@ -178,6 +201,30 @@ export class BusOccupancyComponent implements OnInit {
       this.currentPage--;
 
     }
+
+  }
+
+  generateAllOccupancy(): void {
+
+    this.busOccupancyService.generateAllOccupancy().subscribe({
+
+      next: (response: any) => {
+
+        this.toast.success('Occupancy generated successfully.');
+
+        this.loadOccupancy();
+
+      },
+
+      error: (error: any) => {
+
+        console.error(error);
+
+        this.toast.error('Unable to generate occupancy.');
+
+      }
+
+    });
 
   }
 

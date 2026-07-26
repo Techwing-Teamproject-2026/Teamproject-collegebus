@@ -13,11 +13,8 @@
                 <span class="input-group-text bg-white border-end-0">
                     <i class="bi bi-search text-muted"></i>
                 </span>
-                <input
-                    type="text"
-                    class="form-control border-start-0 ps-0"
-                    placeholder="Search by Bus No, Reg No, Status or Stops"
-                    [(ngModel)]="searchText"
+                <input type="text" class="form-control border-start-0 ps-0"
+                    placeholder="Search by Bus No, Reg No, Status or Stops" [(ngModel)]="searchText"
                     (keyup)="filterBuses()">
             </div>
         </div>
@@ -63,7 +60,8 @@
                 <td>{{bus.capacity}}</td>
 
                 <td>
-                    <span class="badge" [ngClass]="bus.status === 'Active' ? 'bg-success' : (bus.status === 'Maintenance' ? 'bg-warning' : 'bg-danger')">
+                    <span class="badge"
+                        [ngClass]="bus.status === 'Active' ? 'bg-success' : (bus.status === 'Maintenance' ? 'bg-warning' : 'bg-danger')">
                         {{bus.status}}
                     </span>
                 </td>
@@ -78,19 +76,23 @@
 
                 <td>{{bus.speed}}</td>
 
-                <td>
+                <td class="action-column">
 
-                    <button class="btn btn-primary btn-sm me-2" (click)="editBus(bus.busId!)">
+                    <div class="action-buttons">
 
-                        Edit
+                        <button class="btn btn-primary btn-sm" (click)="editBus(bus.busId!)">
 
-                    </button>
+                            Edit
 
-                    <button class="btn btn-danger btn-sm" (click)="deleteBus(bus.busId!)">
+                        </button>
 
-                        Delete
+                        <button class="btn btn-danger btn-sm" (click)="deleteBus(bus.busId!)">
 
-                    </button>
+                            Delete
+
+                        </button>
+
+                    </div>
 
                 </td>
 

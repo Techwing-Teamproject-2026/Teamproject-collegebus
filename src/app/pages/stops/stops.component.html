@@ -18,8 +18,8 @@
                 <span class="input-group-text bg-white border-end-0">
                     <i class="bi bi-search text-muted"></i>
                 </span>
-                <input type="text" class="form-control border-start-0 ps-0" placeholder="Search by Stop Name or Route ID"
-                    [(ngModel)]="searchText" (keyup)="searchStops()">
+                <input type="text" class="form-control border-start-0 ps-0"
+                    placeholder="Search by Stop Name or Route ID" [(ngModel)]="searchText" (keyup)="searchStops()">
             </div>
 
         </div>
@@ -79,19 +79,23 @@
 
                 </td>
 
-                <td>
+                <td class="action-column">
 
-                    <button class="btn btn-primary btn-sm me-2" [routerLink]="['/edit-stop', stop.stopId]">
+                    <div class="action-buttons">
 
-                        Edit
+                        <button class="btn btn-primary btn-sm" [routerLink]="['/edit-stop', stop.stopId]">
 
-                    </button>
+                            Edit
 
-                    <button class="btn btn-danger btn-sm" (click)="deleteStop(stop.stopId!)">
+                        </button>
 
-                        Delete
+                        <button class="btn btn-danger btn-sm" (click)="deleteStop(stop.stopId!)">
 
-                    </button>
+                            Delete
+
+                        </button>
+
+                    </div>
 
                 </td>
 

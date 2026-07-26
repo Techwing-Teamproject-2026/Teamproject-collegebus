@@ -76,6 +76,11 @@ export class SidebarComponent implements OnInit {
       icon: 'bi bi-diagram-2-fill',
       route: '/student-bus-assignment'
     },
+    {
+      title: 'Bus Occupancy',
+      icon: 'bi bi-bar-chart-line-fill',
+      route: '/bus-occupancy'
+    },
 
     // ==========================
     // COMMUNICATION

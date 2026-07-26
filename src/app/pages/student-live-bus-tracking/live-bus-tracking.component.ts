@@ -4,9 +4,12 @@ import * as L from 'leaflet';
 import { Bus } from 'src/app/models/bus';
 import { RealTimeTracking } from 'src/app/models/real-time-tracking';
 import { BusService } from 'src/app/services/bus.service';
-import { RealTimeTrackingService } from 'src/app/services/real-time-tracking.service';
-
+import { BusLocationService } from 'src/app/services/bus-location.service';
+import { BusLocation } from 'src/app/models/bus-location';
 delete (L.Icon.Default.prototype as any)._getIconUrl;
+import { StudentBusAssignmentService } from 'src/app/services/student-bus-assignment.service';
+import { StudentBusAssignment } from 'src/app/models/student-bus-assignment';
+import { ToastService } from 'src/app/services/toast.service';
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
@@ -23,9 +26,13 @@ export class LiveBusTrackingComponent implements OnInit, OnDestroy {
 
   buses: Bus[] = [];
 
-  selectedBus: string = '';
+  selectedBus = '';
 
-  tracking?: RealTimeTracking;
+  studentId!: number;
+
+  assignedBusId!: number;
+
+  tracking?: BusLocation;
 
   loading = false;
 
@@ -47,11 +54,63 @@ export class LiveBusTrackingComponent implements OnInit, OnDestroy {
   refreshInterval: any;
   constructor(
     private busService: BusService,
-    private realTimeTrackingService: RealTimeTrackingService
+    private busLocationService: BusLocationService,
+    private studentBusAssignmentService: StudentBusAssignmentService,
+    private toast: ToastService
   ) { }
 
   ngOnInit(): void {
-    this.loadBuses();
+
+    const id = sessionStorage.getItem('studentId');
+
+    if (!id) {
+      alert('Student not logged in.');
+      return;
+    }
+
+    this.studentId = Number(id);
+
+    this.loadAssignedBus();
+
+  }
+
+  loadAssignedBus(): void {
+
+    this.studentBusAssignmentService
+      .getAssignmentByStudentId(this.studentId)
+      .subscribe({
+
+        next: (assignment: StudentBusAssignment) => {
+
+          this.assignedBusId = assignment.busId;
+
+          this.busService.getAllBuses().subscribe({
+
+            next: (buses: Bus[]) => {
+
+              const bus = buses.find(
+                b => b.busId === this.assignedBusId
+              );
+
+              if (bus) {
+                this.selectedBus = bus.busNo;
+              }
+
+            },
+
+            error: (err) => console.error(err)
+
+          });
+
+        },
+
+        error: (err) => {
+          console.error(err);
+          alert('No bus assigned to this student.');
+        }
+
+      });
+
   }
 
   ngOnDestroy(): void {
@@ -93,6 +152,8 @@ export class LiveBusTrackingComponent implements OnInit, OnDestroy {
 
     }
 
+    this.toast.success(`Tracking bus ${this.selectedBus}`);
+
     this.loadTracking();
 
     if (this.refreshInterval) {
@@ -109,13 +170,31 @@ export class LiveBusTrackingComponent implements OnInit, OnDestroy {
 
     this.loading = true;
 
-    this.realTimeTrackingService.getLatestTracking(this.selectedBus).subscribe({
+    this.busLocationService.getAllLocations().subscribe({
 
-      next: (data: RealTimeTracking) => {
-
-        this.tracking = data;
+      next: (data: BusLocation[]) => {
 
         this.loading = false;
+
+        if (!data || data.length === 0) {
+
+          alert('No bus locations found.');
+          return;
+
+        }
+
+        const busLocation = data.find(
+          location => location.busId === this.assignedBusId
+        );
+
+        if (!busLocation) {
+
+          alert('Live location not available for your assigned bus.');
+          return;
+
+        }
+
+        this.tracking = busLocation;
 
         this.loadMap();
 
@@ -127,14 +206,13 @@ export class LiveBusTrackingComponent implements OnInit, OnDestroy {
 
         this.loading = false;
 
-        alert('No tracking data found for this bus.');
+        alert('Unable to load bus location.');
 
       }
 
     });
 
   }
-
   loadMap(): void {
 
     if (!this.tracking) {
@@ -194,9 +272,11 @@ export class LiveBusTrackingComponent implements OnInit, OnDestroy {
     }
 
     this.marker.bindPopup(
-      `<b>${this.selectedBus}</b><br>
-     Current Stop: ${this.tracking.currentStop}<br>
-     Speed: ${this.tracking.currentSpeed} km/h`
+      `<b>Bus ${this.selectedBus}</b><br>
+   Speed: ${this.tracking?.speed ?? 0} km/h<br>
+   Latitude: ${this.tracking?.latitude}<br>
+   Longitude: ${this.tracking?.longitude}<br>
+   Updated: ${this.tracking?.timestamp}`
     );
 
   }
