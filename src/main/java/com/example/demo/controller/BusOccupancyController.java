@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.demo.models.Bus;
 import com.example.demo.models.BusOccupancy;
+import com.example.demo.repository.BusRepository;
 import com.example.demo.service.BusOccupancyService;
 
 @RestController
@@ -16,6 +18,9 @@ public class BusOccupancyController {
 
 	@Autowired
 	private BusOccupancyService busOccupancyService;
+
+	@Autowired
+	private BusRepository busRepository;
 
 	// Save Bus Occupancy
 	@PostMapping("/save")
@@ -63,6 +68,18 @@ public class BusOccupancyController {
 		busOccupancyService.calculateBusOccupancy(busId);
 
 		return "Bus Occupancy Generated Successfully";
+	}
+
+	@PostMapping("/generateall")
+	public String generateAllOccupancies() {
+
+		List<Bus> buses = busRepository.findAll(); 
+
+		for (Bus bus : buses) {
+			busOccupancyService.calculateBusOccupancy(bus.getBusId());
+		}
+
+		return "All Bus Occupancies Generated Successfully";
 	}
 
 }
