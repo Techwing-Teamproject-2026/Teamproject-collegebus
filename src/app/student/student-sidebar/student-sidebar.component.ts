@@ -39,6 +39,11 @@ export class StudentSidebarComponent implements OnInit {
       route: '/student-bus'
     },
     {
+  title: 'AI Chat',
+  icon: 'bi bi-robot',
+  route: '/student-chat'
+},
+    {
       title: 'My Route',
       icon: 'bi bi-sign-turn-right-fill',
       route: '/student-route'

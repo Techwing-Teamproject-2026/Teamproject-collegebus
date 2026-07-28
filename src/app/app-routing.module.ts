@@ -54,7 +54,7 @@ import { ThemeComponent } from './pages/admintheme/theme.component';
 import { DatabaseBackupComponent } from './pages/database-backup/database-backup.component';
 import { StudentSettingsComponent } from './pages/student-settings/student-settings.component';
 import { StudentThemeComponent } from './pages/student-theme/student-theme.component';
-
+import { StudentChatComponent } from './pages/student-chat/student-chat.component';
 
 const routes: Routes = [
 
@@ -98,6 +98,10 @@ const routes: Routes = [
         path: 'student-profile',
         component: StudentProfileComponent
       },
+      {
+  path: 'student-chat',
+  component: StudentChatComponent
+},
       {
         path: 'student-bus',
         component: StudentBusComponent
