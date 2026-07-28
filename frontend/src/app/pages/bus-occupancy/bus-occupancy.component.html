@@ -1,0 +1,184 @@
+<div class="container-fluid mt-4 animate-fade-in">
+
+    <!-- Summary Widgets -->
+    <div class="row mb-4">
+
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card premium-glow-card student-glow h-100">
+                <div class="card-body text-center d-flex flex-column justify-content-center">
+                    <h6 class="text-uppercase text-muted fw-bold mb-2 letter-spacing-1">Total Buses</h6>
+                    <h2 class="text-glow fw-bold text-white">{{ totalBuses }}</h2>
+                </div>
+                <div class="card-bottom-bar bg-indigo"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card premium-glow-card driver-glow h-100">
+                <div class="card-body text-center d-flex flex-column justify-content-center">
+                    <h6 class="text-uppercase text-muted fw-bold mb-2 letter-spacing-1">Occupied Seats</h6>
+                    <h2 class="text-glow-success fw-bold text-white">{{ totalOccupied }}</h2>
+                </div>
+                <div class="card-bottom-bar bg-emerald"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card premium-glow-card bus-glow h-100">
+                <div class="card-body text-center d-flex flex-column justify-content-center">
+                    <h6 class="text-uppercase text-muted fw-bold mb-2 letter-spacing-1">Available Seats</h6>
+                    <h2 class="text-glow fw-bold text-white">{{ totalAvailable }}</h2>
+                </div>
+                <div class="card-bottom-bar bg-amber"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card premium-glow-card attendance-glow h-100">
+                <div class="card-body text-center d-flex flex-column justify-content-center">
+                    <h6 class="text-uppercase text-muted fw-bold mb-2 letter-spacing-1">Average Occupancy</h6>
+                    <h2 class="text-glow-danger fw-bold text-white">{{ averageOccupancy }}%</h2>
+                </div>
+                <div class="card-bottom-bar bg-rose"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main Card Container -->
+    <div class="card shadow mb-4">
+
+        <div class="card-header bg-primary d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 text-white fw-bold">
+                <i class="bi bi-bar-chart-line-fill me-2 text-indigo"></i>
+                Bus Crowd Prediction Dashboard
+            </h4>
+            <span class="badge bg-primary">ACTIVE ALGORITHMS</span>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Prediction Generator Actions -->
+            <div class="row mb-4 align-items-end">
+
+                <div class="col-xl-4 col-md-6 mb-3 mb-xl-0">
+                    <label class="form-label fw-bold">Select Bus Route</label>
+                    <select class="form-select" [(ngModel)]="selectedBusId">
+                        <option [ngValue]="0">-- Select Bus --</option>
+                        <option *ngFor="let bus of buses" [ngValue]="bus.busId">
+                            Bus {{ bus.busNo }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-xl-3 col-md-6 mb-3 mb-xl-0">
+                    <button class="btn btn-success w-100 py-3" (click)="generateOccupancy()">
+                        <i class="bi bi-cpu-fill me-2"></i>
+                        Predict Occupancy
+                    </button>
+                </div>
+
+                <div class="col-xl-2 col-md-6 mb-3 mb-xl-0">
+                    <button class="btn btn-primary w-100 py-3" (click)="loadOccupancy()">
+                        <i class="bi bi-arrow-clockwise me-2"></i>
+                        Refresh
+                    </button>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <label class="form-label fw-bold">Filter By Bus</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-search"></i></span>
+                        <input type="text" class="form-control" placeholder="Search Bus No..." [(ngModel)]="searchText">
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="my-4 rgba-white">
+
+            <!-- Data Table -->
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>Bus Number</th>
+                            <th>Occupied Seats</th>
+                            <th>Available Seats</th>
+                            <th style="width:250px;">Occupancy Load</th>
+                            <th>Crowd Density</th>
+                            <th>Prediction Updated</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let occupancy of paginatedOccupancies" class="table-row-tech">
+                            <td class="fw-bold text-white">
+                                <span class="bus-badge me-2">🚌</span> Bus {{ getBusNumber(occupancy.busId!) }}
+                            </td>
+                            <td>{{ occupancy.occupied }}</td>
+                            <td>{{ occupancy.available }}</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar"
+                                        [style.width.%]="occupancy.occupancyPercentage ?? 0" [ngClass]="{
+                                        'bg-success': (occupancy.occupancyPercentage ?? 0) < 50,
+                                        'bg-warning': (occupancy.occupancyPercentage ?? 0) >= 50 && (occupancy.occupancyPercentage ?? 0) < 80,
+                                        'bg-danger': (occupancy.occupancyPercentage ?? 0) >= 80
+                                         }">
+                                        {{ occupancy.occupancyPercentage ?? 0 }}%
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-success py-2 px-3" *ngIf="occupancy.crowdLevel=='LOW'">
+                                    LOW CROWD
+                                </span>
+                                <span class="badge bg-warning text-dark py-2 px-3" *ngIf="occupancy.crowdLevel=='MEDIUM'">
+                                    MEDIUM CROWD
+                                </span>
+                                <span class="badge bg-danger py-2 px-3" *ngIf="occupancy.crowdLevel=='HIGH'">
+                                    HIGH CROWD
+                                </span>
+                                <span class="badge bg-dark py-2 px-3" *ngIf="occupancy.crowdLevel=='FULL'">
+                                    CRITICAL FULL
+                                </span>
+                            </td>
+                            <td class="text-muted small">
+                                <i class="bi bi-clock-history me-1"></i>
+                                {{ occupancy.updatedTime | date:'dd-MMM hh:mm a' }}
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- Custom Pagination -->
+            <div class="d-flex justify-content-between align-items-center mt-4" *ngIf="filteredOccupancies.length > 0">
+                <button class="btn btn-secondary px-3" (click)="previousPage()" [disabled]="currentPage==1">
+                    <i class="bi bi-arrow-left me-1"></i> Prev
+                </button>
+                <span class="text-muted font-monospace small">
+                    Page <strong class="text-white">{{ currentPage }}</strong> of <strong class="text-white">{{ totalPages }}</strong>
+                </span>
+                <button class="btn btn-secondary px-3" (click)="nextPage()" [disabled]="currentPage==totalPages">
+                    Next <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+            </div>
+
+            <!-- Empty State -->
+            <div class="text-center py-5" *ngIf="filteredOccupancies.length==0">
+                <i class="bi bi-bus-front-fill fs-1 text-muted mb-3 d-block"></i>
+                <h5 class="text-muted">No Occupancy Log Entries Located</h5>
+                <p class="text-muted small">Click predict occupancy above or add new buses.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

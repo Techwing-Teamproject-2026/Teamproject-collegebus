@@ -1,0 +1,343 @@
+/* ===========================
+   PAGE
+=========================== */
+
+.profile-page {
+    background: #f4f7fb;
+    min-height: 100vh;
+    padding: 30px;
+}
+
+/* ===========================
+   CONTAINER
+=========================== */
+
+.profile-container {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+/* ===========================
+   LEFT PROFILE CARD
+=========================== */
+
+.profile-card {
+    width: 320px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+    position: sticky;
+    top: 20px;
+}
+
+/* ===========================
+   PROFILE IMAGE
+=========================== */
+
+.profile-image {
+    width: 170px;
+    height: 170px;
+    margin: auto;
+    margin-bottom: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid #0d6efd;
+    box-shadow: 0 6px 18px rgba(13, 110, 253, .35);
+    transition: .3s;
+}
+
+.avatar:hover {
+    transform: scale(1.03);
+}
+
+/* ===========================
+   EMPTY PHOTO
+=========================== */
+
+.upload-placeholder {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 4px dashed #0d6efd;
+    background: #eef5ff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: #0d6efd;
+    transition: .3s;
+}
+
+.upload-placeholder:hover {
+    background: #dbeafe;
+    transform: scale(1.03);
+}
+
+.upload-placeholder i {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.upload-placeholder span {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 22px;
+}
+
+/* ===========================
+   CAMERA
+=========================== */
+
+.camera-icon {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #0d6efd;
+    color: #fff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 18px;
+
+    border: 3px solid #fff;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
+
+    transition: .3s;
+}
+
+.camera-icon:hover {
+    transform: scale(1.12);
+    background: #084298;
+}
+
+/* ===========================
+   PROFILE INFO
+=========================== */
+
+.profile-card h3 {
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+.profile-card p {
+    margin-bottom: 15px;
+}
+
+/* ===========================
+   RIGHT SIDE
+=========================== */
+
+.details-card {
+    flex: 1;
+}
+
+/* ===========================
+   SECTION CARD
+=========================== */
+
+.section-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+    margin-bottom: 25px;
+}
+
+.section-card h4 {
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #0d6efd;
+}
+
+/* ===========================
+   FORM
+=========================== */
+
+label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control,
+.form-select {
+    border-radius: 12px;
+    min-height: 46px;
+    border: 1px solid #d8dce3;
+    transition: .3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 10px rgba(13, 110, 253, .25);
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 10px;
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* ===========================
+   BADGES
+=========================== */
+
+.badge {
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 30px;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:992px) {
+
+    .profile-container {
+        flex-direction: column;
+    }
+
+    .profile-card {
+        width: 100%;
+        position: relative;
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .profile-page {
+        padding: 15px;
+    }
+
+    .section-card {
+        padding: 20px;
+    }
+
+    .profile-image,
+    .avatar,
+    .upload-placeholder {
+        width: 130px;
+        height: 130px;
+    }
+
+    .upload-placeholder i {
+        font-size: 32px;
+    }
+
+    .upload-placeholder span {
+        font-size: 13px;
+    }
+
+    .camera-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+}
+
+/* ===========================================
+        CROP MODAL
+=========================================== */
+
+.crop-backdrop {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(0, 0, 0, .75);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 999999;
+
+}
+
+.crop-container {
+
+    width: 750px;
+
+    max-width: 95vw;
+
+    max-height: 95vh;
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .45);
+
+}
+
+.crop-header {
+
+    padding: 18px 24px;
+
+    border-bottom: 1px solid #eee;
+
+    font-weight: 700;
+
+}
+
+.crop-body {
+
+    padding: 20px;
+
+}
+
+.crop-footer {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding: 18px 24px;
+
+    border-top: 1px solid #eee;
+
+}

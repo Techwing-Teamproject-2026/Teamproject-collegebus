@@ -1,0 +1,64 @@
+/* =========================================
+   BUS OCCUPANCY DASHBOARD CSS
+   =========================================*/
+
+.premium-glow-card {
+  position: relative;
+  background: rgba(17, 24, 39, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: 18px !important;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.card-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 0 0 18px 18px;
+}
+
+/* Card Glow Types */
+.student-glow:hover {
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.18), 0 5px 15px rgba(0,0,0,0.4) !important;
+}
+
+.driver-glow:hover {
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.18), 0 5px 15px rgba(0,0,0,0.4) !important;
+}
+
+.bus-glow:hover {
+  border-color: rgba(245, 158, 11, 0.4) !important;
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.18), 0 5px 15px rgba(0,0,0,0.4) !important;
+}
+
+.attendance-glow:hover {
+  border-color: rgba(244, 63, 94, 0.4) !important;
+  box-shadow: 0 12px 30px rgba(244, 63, 94, 0.18), 0 5px 15px rgba(0,0,0,0.4) !important;
+}
+
+/* Accent Bars Colors */
+.bg-indigo { background: #6366f1; }
+.bg-emerald { background: #10b981; }
+.bg-amber { background: #f59e0b; }
+.bg-rose { background: #f43f5e; }
+
+.letter-spacing-1 {
+  letter-spacing: 0.08em;
+  font-size: 0.75rem !important;
+}
+
+/* Bus custom inline badge */
+.bus-badge {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.rgba-white {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}

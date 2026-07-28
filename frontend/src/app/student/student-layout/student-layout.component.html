@@ -1,0 +1,44 @@
+<div class="app-layout student-portal">
+
+    <!-- Navbar -->
+    <header class="top-navbar">
+        <app-student-navbar></app-student-navbar>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+
+        <!-- Sidebar Backdrop Overlay -->
+        <div class="sidebar-backdrop" [class.visible]="!isSidebarCollapsed" (click)="toggleSidebar()"></div>
+
+        <!-- Sidebar -->
+        <aside class="left-sidebar" [class.collapsed]="isSidebarCollapsed">
+
+            <app-student-sidebar></app-student-sidebar>
+
+        </aside>
+
+        <!-- Content -->
+        <main class="content-area">
+
+            <div class="page-loader" *ngIf="loading">
+
+                <div class="loader"></div>
+
+                <p>Loading...</p>
+
+            </div>
+
+            <div class="page-content" *ngIf="!loading">
+
+                <router-outlet></router-outlet>
+
+                <app-footer></app-footer>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>

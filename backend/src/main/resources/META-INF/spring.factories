@@ -1,0 +1,2 @@
+# Application Context Initializers
+org.springframework.context.ApplicationContextInitializer=com.example.demo.config.ChatbotTestInitializer

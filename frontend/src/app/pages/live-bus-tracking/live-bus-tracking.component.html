@@ -1,0 +1,108 @@
+<div class="tracking-page animate-fade-in">
+
+    <!-- Header Section -->
+    <div class="page-header">
+        <div>
+            <h2 class="text-glow text-white"><i class="bi bi-geo-alt-fill text-indigo me-2"></i> Live Bus Tracking</h2>
+            <p class="text-muted">Monitor the live location, speed, and stops of college transit buses.</p>
+        </div>
+
+        <div class="live-pulse-badge">
+            <span class="pulse-point"></span>
+            LIVE RADAR
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <div class="card search-card shadow-sm mb-4">
+        <div class="search-row align-items-end">
+            <div class="search-box">
+                <label class="form-label fw-bold">Select Active Transit Bus</label>
+                <select class="form-select" [(ngModel)]="selectedBus">
+                    <option value="">-- Choose Bus --</option>
+                    <option *ngFor="let bus of buses" [value]="bus.busNo">
+                        Bus {{bus.busNo}}
+                    </option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary track-btn py-3" (click)="trackBus()">
+                <i class="bi bi-compass-fill me-2"></i>
+                Track Location
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Live Content Layout -->
+    <div class="content-layout">
+
+        <!-- Map card -->
+        <div class="card map-section shadow-lg">
+            <div class="card-header bg-dark d-flex align-items-center">
+                <i class="bi bi-map-fill text-indigo me-2"></i>
+                Satellite Navigation Track
+            </div>
+            <div id="map"></div>
+        </div>
+
+        <!-- Bus details section -->
+        <div class="card details-section shadow-lg">
+            <div class="card-header bg-dark d-flex align-items-center">
+                <i class="bi bi-info-circle-fill text-indigo me-2"></i>
+                Telemetry Details
+            </div>
+
+            <div class="details-body" *ngIf="tracking; else noBus">
+                <div class="info-card-item">
+                    <span class="label">Bus Number</span>
+                    <span class="value text-white fw-bold">Bus {{selectedBus}}</span>
+                </div>
+
+                <div class="info-card-item">
+                    <span class="label">Current Speed</span>
+                    <span class="value text-glow-success fw-bold">{{tracking.currentSpeed}} km/h</span>
+                </div>
+
+                <div class="info-card-item">
+                    <span class="label">Current Stop</span>
+                    <span class="value text-white">{{tracking.currentStop}}</span>
+                </div>
+
+                <div class="info-card-item">
+                    <span class="label">Next Stop</span>
+                    <span class="value text-indigo">{{tracking.nextStop}}</span>
+                </div>
+
+                <div class="info-card-item">
+                    <span class="label">ETA Minutes</span>
+                    <span class="value text-glow">{{tracking.etaMinutes}} Mins</span>
+                </div>
+
+                <div class="info-card-item">
+                    <span class="label">Telemetry Time</span>
+                    <span class="value text-muted small">{{tracking.trackingTime}}</span>
+                </div>
+
+                <div class="info-card-item">
+                    <span class="label">Latitude</span>
+                    <span class="value font-monospace small text-muted">{{tracking.latitude}}</span>
+                </div>
+
+                <div class="info-card-item">
+                    <span class="label">Longitude</span>
+                    <span class="value font-monospace small text-muted">{{tracking.longitude}}</span>
+                </div>
+            </div>
+
+            <ng-template #noBus>
+                <div class="empty-state py-5 text-center">
+                    <i class="bi bi-bus-front-fill fs-1 text-muted mb-3 d-block float-bus"></i>
+                    <h5 class="text-muted">No Active Tracker Selected</h5>
+                    <p class="text-muted small px-3">Select a transit bus from the dropdown menu to initiate active live location pinging.</p>
+                </div>
+            </ng-template>
+        </div>
+
+    </div>
+
+</div>
